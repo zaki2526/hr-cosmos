@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HR COSMOS — Emirates Neon Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   DESIGN SYSTEM — EMIRATES NEON × HR COSMOS
+   Aesthetic: Luxury editorial dark intelligence
+   ═══════════════════════════════════════════════ */
+:root{
+  --void:#080B0F;
+  --deep:#0D1219;
+  --surface:#131920;
+  --card:#171F28;
+  --border:rgba(255,255,255,.06);
+  --border-bright:rgba(255,255,255,.12);
+  --text:#E8EDF2;
+  --muted:#5A6478;
+  --faint:#2A3340;
+
+  --gold:#C9A84C;
+  --gold-light:#E8C96A;
+  --gold-dim:rgba(201,168,76,.15);
+  --gold-glow:rgba(201,168,76,.08);
+
+  --sapphire:#3D5AFE;
+  --emerald:#00BFA5;
+  --ruby:#F44336;
+  --amber:#FF8F00;
+
+  --r:12px;
+  --r-lg:16px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+html,body{height:100%;overflow:hidden;background:var(--void)}
+body{font-family:'DM Sans',sans-serif;color:var(--text);display:flex;flex-direction:column}
+
+/* ═══ SCROLLBAR ═══ */
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--faint);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--muted)}
+
+/* ═══ TOPBAR ═══ */
+.topbar{
+  height:52px;background:var(--deep);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;flex-shrink:0;position:relative;z-index:100
+}
+.topbar::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  opacity:.4
+}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-icon{
+  width:30px;height:30px;border-radius:8px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;
+  color:var(--void);letter-spacing:-.5px
+}
+.brand-name{
+  font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;
+  color:var(--text);letter-spacing:.02em
+}
+.brand-name em{color:var(--gold);font-style:normal}
+.topbar-center{
+  position:absolute;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:16px
+}
+.nav-tab{
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  cursor:pointer;padding:4px 0;border-bottom:2px solid transparent;
+  transition:all .2s
+}
+.nav-tab.active,.nav-tab:hover{color:var(--gold);border-bottom-color:var(--gold)}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.live-pill{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(0,191,165,.1);border:1px solid rgba(0,191,165,.2);
+  border-radius:20px;padding:4px 10px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:var(--emerald)
+}
+.pulse{width:6px;height:6px;border-radius:50%;background:var(--emerald);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+.date-badge{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
+
+/* ═══ LAYOUT ═══ */
+.main{display:flex;flex:1;overflow:hidden}
+
+/* ═══ DASHBOARD PANEL ═══ */
+.dashboard{
+  flex:1;overflow-y:auto;background:var(--void);
+  padding:20px 22px 48px;
+}
+
+/* ═══ CHAT PANEL ═══ */
+.chat-panel{
+  width:400px;flex-shrink:0;
+  background:var(--deep);
+  border-left:1px solid var(--border);
+  display:flex;flex-direction:column;overflow:hidden;
+  position:relative
+}
+.chat-panel::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:200px;
+  background:radial-gradient(ellipse at top,rgba(201,168,76,.04) 0%,transparent 70%);
+  pointer-events:none
+}
+@media(max-width:1000px){
+  .chat-panel{width:340px}
+}
+@media(max-width:800px){
+  .main{flex-direction:column}
+  .chat-panel{width:100%;height:320px;border-left:none;border-top:1px solid var(--border)}
+  .dashboard{padding:14px 14px 24px}
+  .topbar-center{display:none}
+}
+
+/* ═══ CHAT HEADER ═══ */
+.chat-header{
+  padding:16px 18px 14px;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;position:relative;z-index:1
+}
+.chat-header-top{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.ai-avatar{
+  width:32px;height:32px;border-radius:10px;
+  background:linear-gradient(135deg,var(--sapphire),#7B61FF);
+  display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0
+}
+.chat-header-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--text)}
+.chat-header-sub{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.chat-status{
+  display:flex;align-items:center;gap:6px;margin-top:8px;
+  background:rgba(0,191,165,.06);border:1px solid rgba(0,191,165,.12);
+  border-radius:6px;padding:6px 10px;font-size:11px;color:var(--emerald);
+  font-family:'JetBrains Mono',monospace
+}
+
+/* ═══ CHAT MESSAGES ═══ */
+.chat-messages{
+  flex:1;overflow-y:auto;padding:14px 14px 6px;
+  display:flex;flex-direction:column;gap:10px;
+  position:relative;z-index:1
+}
+
+.msg{display:flex;flex-direction:column;gap:3px;max-width:95%}
+.msg.user{align-self:flex-end;align-items:flex-end}
+.msg.ai{align-self:flex-start;align-items:flex-start}
+
+.msg-bubble{
+  padding:10px 14px;border-radius:14px;font-size:13px;line-height:1.65;
+  word-break:break-word;animation:msgIn .25s ease
+}
+@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+.msg.user .msg-bubble{
+  background:linear-gradient(135deg,#2D2A8F,#4C49B8);
+  color:#fff;border-radius:14px 14px 2px 14px;
+  box-shadow:0 4px 16px rgba(45,42,143,.3)
+}
+.msg.ai .msg-bubble{
+  background:var(--surface);color:var(--text);
+  border:1px solid var(--border-bright);
+  border-radius:14px 14px 14px 2px;
+  box-shadow:0 2px 12px rgba(0,0,0,.3)
+}
+.msg.ai .msg-bubble strong{color:var(--gold)}
+.msg.ai .msg-bubble .aed{
+  color:var(--emerald);font-family:'JetBrains Mono',monospace;
+  font-weight:600;font-size:12px
+}
+.msg.ai .msg-bubble .law{
+  display:inline-block;font-family:'JetBrains Mono',monospace;
+  font-size:10px;background:rgba(61,90,254,.15);color:#90A4FF;
+  padding:1px 6px;border-radius:4px;margin:0 2px
+}
+.msg-meta{display:flex;align-items:center;gap:6px}
+.msg-time{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.msg-rag{font-size:9px;font-weight:700;padding:1px 7px;border-radius:8px;font-family:'JetBrains Mono',monospace}
+.rag-r{background:rgba(244,67,54,.15);color:#EF9A9A}
+.rag-a{background:rgba(255,143,0,.15);color:#FFB74D}
+.rag-g{background:rgba(0,191,165,.15);color:#4DB6AC}
+
+/* TYPING */
+.typing{
+  display:flex;gap:5px;align-items:center;padding:12px 14px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:14px 14px 14px 2px;align-self:flex-start
+}
+.td{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:td 1.4s infinite}
+.td:nth-child(2){animation-delay:.2s}.td:nth-child(3){animation-delay:.4s}
+@keyframes td{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-7px);opacity:1}}
+
+/* ═══ QUICK QUESTIONS ═══ */
+.quick-wrap{
+  padding:10px 14px;border-top:1px solid var(--border);
+  flex-shrink:0;position:relative;z-index:1
+}
+.quick-label{
+  font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:7px
+}
+.quick-grid{display:flex;flex-direction:column;gap:4px}
+.qbtn{
+  background:rgba(255,255,255,.03);border:1px solid var(--border);
+  border-radius:8px;padding:7px 11px;font-size:12px;color:var(--muted);
+  cursor:pointer;text-align:left;transition:all .18s;
+  font-family:'DM Sans',sans-serif;line-height:1.3;
+}
+.qbtn:hover{
+  background:var(--gold-glow);border-color:rgba(201,168,76,.25);
+  color:var(--gold-light);transform:translateX(2px)
+}
+
+/* ═══ CHAT INPUT ═══ */
+.chat-input-wrap{
+  padding:10px 14px 12px;border-top:1px solid var(--border);
+  flex-shrink:0;position:relative;z-index:1
+}
+.input-row{display:flex;gap:8px;align-items:flex-end}
+.chat-input{
+  flex:1;background:var(--surface);border:1px solid var(--border-bright);
+  border-radius:10px;padding:10px 14px;font-size:13px;color:var(--text);
+  font-family:'DM Sans',sans-serif;resize:none;outline:none;
+  line-height:1.5;max-height:90px;overflow-y:auto;
+  transition:border-color .2s,box-shadow .2s;min-height:40px
+}
+.chat-input:empty::before{content:attr(data-placeholder);color:var(--muted);pointer-events:none}
+.chat-input:focus{border-color:rgba(201,168,76,.35);box-shadow:0 0 0 3px rgba(201,168,76,.06)}
+.send-btn{
+  width:38px;height:38px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:var(--void);font-size:16px;transition:all .2s;font-weight:700
+}
+.send-btn:hover{transform:scale(1.05);box-shadow:0 4px 16px rgba(201,168,76,.3)}
+.send-btn:disabled{opacity:.3;cursor:not-allowed;transform:none}
+.input-hint{
+  text-align:center;font-size:10px;color:var(--muted);
+  font-family:'JetBrains Mono',monospace;margin-top:6px
+}
+
+/* VOICE BUTTON */
+.mic-btn{
+  width:38px;height:38px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,#0A5C42,#00BFA5) !important;
+  border:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:16px;transition:background .2s,box-shadow .2s,transform .2s;color:#fff;
+  box-shadow:0 2px 8px rgba(0,191,165,.3) !important
+}
+.mic-btn:hover:not(.listening){
+  background:linear-gradient(135deg,#0B6E4F,#00D4B5) !important;
+  transform:scale(1.05);box-shadow:0 4px 14px rgba(0,191,165,.4) !important
+}
+.mic-btn.listening,
+.mic-btn.listening:hover{
+  background:linear-gradient(135deg,#B91C1C,#EF4444) !important;
+  box-shadow:0 0 18px rgba(239,68,68,.7) !important;
+  animation:micPulse 1s infinite
+}
+@keyframes micPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1);box-shadow:0 0 22px rgba(244,67,54,.8) !important}}
+
+/* VOICE STATUS */
+.voice-status{
+  display:flex;align-items:center;gap:8px;padding:7px 12px;
+  background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.2);
+  border-radius:8px;margin-top:6px;font-size:12px;color:#EF9A9A;
+  font-family:'JetBrains Mono',monospace
+}
+.voice-pulse{
+  width:8px;height:8px;border-radius:50%;background:#EF9A9A;
+  animation:micPulse 1s infinite;flex-shrink:0
+}
+
+/* STOP BUTTON */
+.stop-btn{
+  background:rgba(244,67,54,.15);border:1px solid rgba(244,67,54,.3);
+  border-radius:6px;padding:3px 10px;font-size:10px;color:#EF9A9A;
+  cursor:pointer;font-family:'JetBrains Mono',monospace;font-weight:600;
+  transition:all .15s;margin-left:auto
+}
+.stop-btn:hover{background:rgba(244,67,54,.3)}
+
+/* VOICE TOGGLE */
+.voice-toggle{
+  display:flex;align-items:center;gap:5px;cursor:pointer;flex:1
+}
+.voice-toggle input{accent-color:var(--emerald);width:13px;height:13px}
+
+/* SPEAKING ANIMATION ON AI BUBBLE */
+.msg.ai.speaking .msg-bubble{
+  border-color:rgba(0,191,165,.4);
+  box-shadow:0 0 0 2px rgba(0,191,165,.15)
+}
+
+/* TABLE STYLES */
+.tbl-wrap{overflow-x:auto;margin:8px 0;border-radius:8px;border:1px solid rgba(255,255,255,.1)}
+.ai-table{width:100%;border-collapse:collapse;font-size:12px;min-width:300px}
+.ai-table th{
+  background:rgba(45,42,143,.6);color:#fff;padding:7px 10px;
+  text-align:left;font-family:'JetBrains Mono',monospace;font-size:10px;
+  font-weight:600;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap
+}
+.ai-table td{
+  padding:6px 10px;border-bottom:1px solid rgba(255,255,255,.06);
+  color:var(--text);font-size:12px;vertical-align:middle
+}
+.ai-table tr:hover td{background:rgba(255,255,255,.04)}
+.ai-table tr:last-child td{border-bottom:none}
+.ai-heading{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;
+  color:var(--gold);margin:10px 0 6px}
+.ai-bullet{padding:2px 0;font-size:13px;line-height:1.6}
+
+/* DOWNLOAD BUTTON */
+.dl-btn{
+  display:flex;align-items:center;gap:6px;margin-top:12px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  border:none;border-radius:8px;padding:8px 16px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;
+  color:var(--void);cursor:pointer;transition:all .2s;width:100%;
+  justify-content:center;letter-spacing:.04em
+}
+.dl-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(201,168,76,.3)}
+
+/* ═══════════════════════════════════════════════
+   DASHBOARD COMPONENTS
+   ═══════════════════════════════════════════════ */
+.section-label{
+  font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--muted);
+  margin:18px 0 10px;padding-bottom:6px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:8px
+}
+.section-label span{
+  display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold)
+}
+.section-label:first-child{margin-top:0}
+
+/* ALERT STRIP */
+.alert{
+  background:linear-gradient(135deg,rgba(244,67,54,.12),rgba(244,67,54,.06));
+  border:1px solid rgba(244,67,54,.25);border-radius:var(--r);
+  padding:9px 16px;margin-bottom:14px;
+  display:flex;align-items:center;gap:9px;font-size:12px;font-weight:500;
+  color:#EF9A9A;animation:alertPulse 3s infinite
+}
+@keyframes alertPulse{0%,100%{border-color:rgba(244,67,54,.25)}50%{border-color:rgba(244,67,54,.45)}}
+.alert-icon{font-size:14px;flex-shrink:0}
+
+/* KPI GRID */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+@media(max-width:700px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+
+.kpi{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r);padding:14px 16px;
+  position:relative;overflow:hidden;cursor:default;
+  transition:border-color .2s,transform .2s
+}
+.kpi:hover{border-color:var(--border-bright);transform:translateY(-1px)}
+.kpi::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+}
+.kpi.k1::before{background:linear-gradient(90deg,var(--gold),transparent)}
+.kpi.k2::before{background:linear-gradient(90deg,var(--emerald),transparent)}
+.kpi.k3::before{background:linear-gradient(90deg,var(--amber),transparent)}
+.kpi.k4::before{background:linear-gradient(90deg,var(--ruby),transparent)}
+.kpi::after{
+  content:'';position:absolute;top:0;right:0;
+  width:60px;height:100%;
+  background:linear-gradient(270deg,rgba(201,168,76,.03),transparent);
+  pointer-events:none
+}
+.kpi-lbl{
+  font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px
+}
+.kpi-val{
+  font-family:'Cormorant Garamond',serif;font-size:26px;
+  font-weight:700;line-height:1.1;margin-bottom:3px;color:var(--text)
+}
+.kpi-sub{font-size:11px;color:var(--muted)}
+
+/* CARD */
+.card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r);padding:16px;
+  transition:border-color .2s
+}
+.card:hover{border-color:var(--border-bright)}
+.card-hd{
+  font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;
+  margin-bottom:12px;display:flex;align-items:center;gap:8px;color:var(--text)
+}
+.cdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.cd1{background:var(--gold)}.cd2{background:var(--emerald)}
+.cd3{background:var(--amber)}.cd4{background:var(--ruby)}
+
+/* DATA ROWS */
+.dr{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:5px 0;border-bottom:1px solid var(--border);font-size:12px
+}
+.dr:last-child{border-bottom:none}
+.dr .lbl{color:var(--muted)}
+.dr .val{font-weight:600;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text)}
+.dr .val.gd{color:var(--gold)}.dr .val.em{color:var(--emerald)}
+.dr .val.am{color:var(--amber)}.dr .val.rb{color:var(--ruby)}
+.dt{
+  display:flex;justify-content:space-between;font-size:12px;font-weight:600;
+  border-top:1px solid var(--border-bright);padding-top:8px;margin-top:4px
+}
+.dt .val{font-family:'JetBrains Mono',monospace;color:var(--gold)}
+
+/* BAR ROWS */
+.br{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:11px}
+.br-lbl{width:105px;color:var(--muted);text-align:right;flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:10px}
+.br-track{flex:1;background:var(--faint);border-radius:3px;height:14px;overflow:hidden}
+.br-fill{
+  height:100%;border-radius:3px;display:flex;align-items:center;
+  padding-left:6px;font-size:10px;font-weight:600;color:rgba(255,255,255,.8);
+  font-family:'JetBrains Mono',monospace;
+  transition:width 1s cubic-bezier(.25,.46,.45,.94)
+}
+.br-n{width:28px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--text)}
+
+/* EXPIRY GRID */
+.exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px}
+.exp-box{border-radius:8px;padding:10px 6px;text-align:center}
+.exp-box.cr{background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.2)}
+.exp-box.wn{background:rgba(255,143,0,.1);border:1px solid rgba(255,143,0,.2)}
+.exp-box.ok{background:rgba(0,191,165,.1);border:1px solid rgba(0,191,165,.2)}
+.exp-box .en{
+  font-family:'Cormorant Garamond',serif;font-size:22px;
+  font-weight:700;line-height:1
+}
+.exp-box.cr .en{color:#EF9A9A}.exp-box.wn .en{color:#FFB74D}.exp-box.ok .en{color:#4DB6AC}
+.exp-box .el{font-size:9px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace}
+
+/* LEAVE BARS */
+.lv-row{display:flex;align-items:center;gap:7px;margin:4px 0;font-size:11px}
+.lv-nm{width:95px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex-shrink:0;color:var(--text)}
+.lv-track{flex:1;background:var(--faint);border-radius:3px;height:11px;overflow:hidden}
+.lv-bar{height:100%;border-radius:3px}
+.lv-days{width:42px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;flex-shrink:0}
+
+/* EOSB TABLE */
+.etbl{width:100%;border-collapse:collapse;font-size:11px}
+.etbl th{
+  background:var(--surface);font-size:9px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;padding:6px 8px;
+  text-align:left;border-bottom:1px solid var(--border-bright);
+  font-family:'JetBrains Mono',monospace;color:var(--muted)
+}
+.etbl td{padding:6px 8px;border-bottom:1px solid var(--border);vertical-align:middle;color:var(--text)}
+.etbl tr:last-child td{border-bottom:none}
+.etbl tr:hover td{background:rgba(255,255,255,.02)}
+.etbl .nm{font-family:'JetBrains Mono',monospace;font-weight:600;text-align:right;font-size:11px;color:var(--gold)}
+.rnk{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:18px;height:18px;border-radius:6px;
+  background:var(--faint);color:var(--muted);
+  font-size:9px;font-weight:700;font-family:'JetBrains Mono',monospace
+}
+.rnk.top{background:var(--gold-dim);color:var(--gold)}
+
+/* ACTION CARDS */
+.ac{
+  border-radius:var(--r);padding:11px 13px;margin-bottom:8px;
+  display:flex;gap:10px;align-items:flex-start;
+  transition:transform .15s
+}
+.ac:hover{transform:translateX(2px)}
+.ac.t{background:rgba(244,67,54,.08);border:1px solid rgba(244,67,54,.2)}
+.ac.m{background:rgba(255,143,0,.08);border:1px solid rgba(255,143,0,.2)}
+.ac.s{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15)}
+.ac-tag{
+  font-size:9px;font-weight:700;letter-spacing:.08em;padding:2px 8px;
+  border-radius:10px;white-space:nowrap;font-family:'JetBrains Mono',monospace;
+  flex-shrink:0;margin-top:2px
+}
+.ac.t .ac-tag{background:rgba(244,67,54,.2);color:#EF9A9A}
+.ac.m .ac-tag{background:rgba(255,143,0,.2);color:#FFB74D}
+.ac.s .ac-tag{background:var(--gold-dim);color:var(--gold)}
+.ac-body{font-size:12px;line-height:1.55;color:var(--text)}
+.ac-amt{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;margin-top:3px}
+.ac.t .ac-amt{color:#EF9A9A}.ac.m .ac-amt{color:#FFB74D}.ac.s .ac-amt{color:var(--gold)}
+
+/* COMPLIANCE STRIP */
+.comp-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border);
+  border-radius:var(--r);overflow:hidden
+}
+.comp-cell{background:var(--card);padding:12px;text-align:center}
+.comp-lbl{
+  font-size:9px;font-weight:600;letter-spacing:.08em;
+  font-family:'JetBrains Mono',monospace;color:var(--muted);
+  margin-bottom:5px;text-transform:uppercase
+}
+.badge{
+  display:inline-block;font-size:9px;font-weight:700;
+  letter-spacing:.06em;padding:3px 9px;border-radius:20px;
+  font-family:'JetBrains Mono',monospace
+}
+.badge.r{background:rgba(244,67,54,.15);color:#EF9A9A}
+.badge.a{background:rgba(255,143,0,.15);color:#FFB74D}
+.badge.g{background:rgba(0,191,165,.15);color:#4DB6AC}
+.comp-note{font-size:10px;color:var(--muted);margin-top:4px;line-height:1.4}
+
+/* GRID LAYOUTS */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media(max-width:700px){.two-col,.three-col{grid-template-columns:1fr}}
+
+/* FADE IN ANIMATION */
+.fi{
+  opacity:0;transform:translateY(14px);
+  animation:fi .5s ease forwards
+}
+.fi:nth-child(1){animation-delay:.05s}.fi:nth-child(2){animation-delay:.1s}
+.fi:nth-child(3){animation-delay:.15s}.fi:nth-child(4){animation-delay:.2s}
+.fi:nth-child(5){animation-delay:.25s}.fi:nth-child(6){animation-delay:.3s}
+.fi:nth-child(7){animation-delay:.35s}.fi:nth-child(8){animation-delay:.4s}
+.fi:nth-child(9){animation-delay:.45s}.fi:nth-child(10){animation-delay:.5s}
+@keyframes fi{to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<!-- ═══ TOPBAR ═══ -->
+<nav class="topbar" role="navigation">
+  <div class="brand">
+    <div class="brand-icon">HC</div>
+    <div class="brand-name">HR <em>COSMOS</em></div>
+  </div>
+  <div class="topbar-center">
+    <div class="nav-tab active">Dashboard</div>
+    <div class="nav-tab" style="color:var(--muted)">·</div>
+    <div class="nav-tab">Analytics</div>
+    <div class="nav-tab" style="color:var(--muted)">·</div>
+    <div class="nav-tab">Compliance</div>
+  </div>
+  <div class="topbar-right">
+    <div class="live-pill"><div class="pulse"></div>Live · May 2026</div>
+    <div class="date-badge">Emirates Neon Group</div>
+  </div>
+</nav>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main">
+
+  <!-- ══════════════════════════════════
+       LEFT — DASHBOARD
+       ══════════════════════════════════ -->
+  <div class="dashboard" id="dashboard">
+
+    <div class="section-label fi"><span></span>01 — Workforce intelligence</div>
+
+    <div class="alert fi" role="alert">
+      <div class="alert-icon">⚠</div>
+      <div><strong style="color:#fff">58 documents require immediate PRO action:</strong>&nbsp; 35 labor cards overdue · 21 visa/EID overdue · 2 passports overdue &nbsp;·&nbsp; MOHRE fine exposure: <strong style="color:#fff">AED 29,000+/month</strong></div>
+    </div>
+
+    <div class="kpi-grid fi">
+      <div class="kpi k1">
+        <div class="kpi-lbl">Total in scope</div>
+        <div class="kpi-val">112</div>
+        <div class="kpi-sub">50 staff · 62 workers</div>
+      </div>
+      <div class="kpi k2">
+        <div class="kpi-lbl">Avg service</div>
+        <div class="kpi-val">13.4 yrs</div>
+        <div class="kpi-sub">Longest serving: 38.2 yrs</div>
+      </div>
+      <div class="kpi k3">
+        <div class="kpi-lbl">May 2026 payroll</div>
+        <div class="kpi-val">AED 487K</div>
+        <div class="kpi-sub">Staff 374,650 · Workers 112,263</div>
+      </div>
+      <div class="kpi k4">
+        <div class="kpi-lbl">Net EOSB liability</div>
+        <div class="kpi-val">AED 3.24M</div>
+        <div class="kpi-sub">12-month proj: AED 3.43M</div>
+      </div>
+    </div>
+
+    <div class="two-col fi" style="margin-bottom:12px">
+      <div class="card">
+        <div class="card-hd"><span class="cdot cd1"></span>Tenure distribution</div>
+        <div class="br"><span class="br-lbl">20+ years</span><div class="br-track"><div class="br-fill" style="width:55%;background:linear-gradient(90deg,#C9A84C,#E8C96A)">31</div></div><span class="br-n">31</span></div>
+        <div class="br"><span class="br-lbl">10–20 years</span><div class="br-track"><div class="br-fill" style="width:50%;background:linear-gradient(90deg,#9C8040,#C9A84C)">28</div></div><span class="br-n">28</span></div>
+        <div class="br"><span class="br-lbl">5–10 years</span><div class="br-track"><div class="br-fill" style="width:54%;background:#6B5A30">30</div></div><span class="br-n">30</span></div>
+        <div class="br"><span class="br-lbl">3–5 years</span><div class="br-track"><div class="br-fill" style="width:13%;background:#3D3420"> 7</div></div><span class="br-n">7</span></div>
+        <div class="br"><span class="br-lbl">1–3 years</span><div class="br-track"><div class="br-fill" style="width:25%;background:#2A2515">14</div></div><span class="br-n">14</span></div>
+        <div style="font-size:10px;color:var(--muted);margin-top:8px;font-family:'JetBrains Mono',monospace">⚡ 59 employees (53%) have 10+ years — EOSB concentration risk</div>
+      </div>
+      <div class="card">
+        <div class="card-hd"><span class="cdot cd2"></span>Nationality profile</div>
+        <div class="br"><span class="br-lbl">Indian</span><div class="br-track"><div class="br-fill" style="width:96%;background:linear-gradient(90deg,#00BFA5,#4DB6AC)">54</div></div><span class="br-n">54</span></div>
+        <div class="br"><span class="br-lbl">Pakistani</span><div class="br-track"><div class="br-fill" style="width:52%;background:#00897B">29</div></div><span class="br-n">29</span></div>
+        <div class="br"><span class="br-lbl">Bangladeshi</span><div class="br-track"><div class="br-fill" style="width:30%;background:#00695C">17</div></div><span class="br-n">17</span></div>
+        <div class="br"><span class="br-lbl">Filipino</span><div class="br-track"><div class="br-fill" style="width:7%;background:#004D40"> 4</div></div><span class="br-n">4</span></div>
+        <div class="br"><span class="br-lbl">Nepali</span><div class="br-track"><div class="br-fill" style="width:5%;background:#00332B"> 3</div></div><span class="br-n">3</span></div>
+        <div class="br"><span class="br-lbl">UAE National</span><div class="br-track"><div class="br-fill" style="width:4%;background:#001A17"> 2</div></div><span class="br-n">2</span></div>
+        <div style="font-size:10px;color:var(--muted);margin-top:8px;font-family:'JetBrains Mono',monospace">Top 3 nationalities = 100 employees (89%)</div>
+      </div>
+    </div>
+
+    <div class="section-label fi"><span></span>02 — EOSB financial position</div>
+    <div class="three-col fi" style="margin-bottom:12px">
+      <div class="card">
+        <div class="card-hd"><span class="cdot cd1"></span>Liability breakdown</div>
+        <div class="dr"><span class="lbl">Gratuity (Art. 51)</span><span class="val gd">AED 2,330,418</span></div>
+        <div class="dr"><span class="lbl">Leave salary (Art. 29)</span><span class="val gd">AED 2,133,743</span></div>
+        <div class="dr"><span class="lbl">Total EOSB gross</span><span class="val">AED 4,464,161</span></div>
+        <div class="dr"><span class="lbl">Less: paid advances</span><span class="val em">(AED 259,100)</span></div>
+        <div class="dr"><span class="lbl">Less: fines/deductions</span><span class="val em">(AED 155,751)</span></div>
+        <div class="dt"><span>Net EOSB balance</span><span class="val">AED 3,244,079</span></div>
+      </div>
+      <div class="card">
+        <div class="card-hd"><span class="cdot cd3"></span>Accruals & projections</div>
+        <div class="dr"><span class="lbl">Monthly accrual</span><span class="val am">AED 15,807</span></div>
+        <div class="dr"><span class="lbl">Annual accrual</span><span class="val am">AED 189,684</span></div>
+        <div class="dr"><span class="lbl">12-month projection</span><span class="val">AED 3,433,763</span></div>
+        <div class="dr"><span class="lbl">24-month projection</span><span class="val">AED 3,623,447</span></div>
+        <div class="dr"><span class="lbl">UAE vs ENG gap</span><span class="val rb">+AED 575,193</span></div>
+        <div class="dr"><span class="lbl">Legal exposure</span><span class="val rb">+16%</span></div>
+      </div>
+      <div class="card">
+        <div class="card-hd"><span class="cdot cd4"></span>Top 10 EOSB holders</div>
+        <table class="etbl">
+          <thead><tr><th>#</th><th>Employee</th><th style="text-align:right">EOSB (AED)</th></tr></thead>
+          <tbody>
+            <tr><td><span class="rnk top">1</span></td><td>Shuja Charoo</td><td class="nm">302,507</td></tr>
+            <tr><td><span class="rnk top">2</span></td><td>Kaleem Javeed</td><td class="nm">145,200</td></tr>
+            <tr><td><span class="rnk top">3</span></td><td>A. Inbaraj David</td><td class="nm">142,704</td></tr>
+            <tr><td><span class="rnk">4</span></td><td>Memon Rizwan</td><td class="nm">136,846</td></tr>
+            <tr><td><span class="rnk">5</span></td><td>M.V. Subhas</td><td class="nm">106,329</td></tr>
+            <tr><td><span class="rnk">6</span></td><td>Rahman Ali Usman</td><td class="nm">101,483</td></tr>
+            <tr><td><span class="rnk">7</span></td><td>S.F. Raza Zaidi</td><td class="nm">77,146</td></tr>
+            <tr><td><span class="rnk">8</span></td><td>Mahmood Al Jabi</td><td class="nm">69,307</td></tr>
+            <tr><td><span class="rnk">9</span></td><td>Haby Thomson</td><td class="nm">65,543</td></tr>
+            <tr><td><span class="rnk">10</span></td><td>Kazi Zakir Hussain</td><td class="nm">60,800</td></tr>
+            <tr style="background:var(--surface)"><td colspan="2" style="font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--muted)">Top 10 = 38% of total EOSB</td><td class="nm">1,207,865</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section-label fi"><span></span>03 — Document expiry alerts</div>
+    <div class="card fi" style="margin-bottom:12px">
+      <div class="card-hd"><span class="cdot cd4"></span>Passport · Visa/EID · Labor Card — 29 May 2026</div>
+      <div class="three-col" style="gap:18px">
+        <div>
+          <div style="font-size:9px;font-weight:600;font-family:'JetBrains Mono',monospace;margin-bottom:7px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em">Passport</div>
+          <div class="exp-grid">
+            <div class="exp-box cr"><div class="en">2</div><div class="el">Overdue</div></div>
+            <div class="exp-box wn"><div class="en">2</div><div class="el">≤90 days</div></div>
+            <div class="exp-box ok"><div class="en">9</div><div class="el">91–180d</div></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:9px;font-weight:600;font-family:'JetBrains Mono',monospace;margin-bottom:7px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em">Visa / EID</div>
+          <div class="exp-grid">
+            <div class="exp-box cr"><div class="en">21</div><div class="el">Overdue</div></div>
+            <div class="exp-box wn"><div class="en">9</div><div class="el">≤90 days</div></div>
+            <div class="exp-box ok"><div class="en">3</div><div class="el">91–180d</div></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:9px;font-weight:600;font-family:'JetBrains Mono',monospace;margin-bottom:7px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em">Labor Card</div>
+          <div class="exp-grid">
+            <div class="exp-box cr"><div class="en">35</div><div class="el">Overdue</div></div>
+            <div class="exp-box wn"><div class="en">8</div><div class="el">≤90 days</div></div>
+            <div class="exp-box ok"><div class="en">11</div><div class="el">91–180d</div></div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:10px;padding:8px 12px;background:rgba(244,67,54,.08);border:1px solid rgba(244,67,54,.15);border-radius:7px;font-size:11px;color:#EF9A9A;font-family:'JetBrains Mono',monospace">
+        ⚠ 58 documents overdue or expiring ≤90 days · AED 500/document/month MOHRE fine · Total exposure: <strong style="color:#fff">AED 29,000+/month</strong>
+      </div>
+    </div>
+
+    <div class="section-label fi"><span></span>04 — Workers leave status</div>
+    <div class="two-col fi" style="margin-bottom:12px">
+      <div class="card">
+        <div class="card-hd"><span class="cdot cd3"></span>Leave compliance — 58 workers</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px">
+          <div style="text-align:center;padding:10px 6px;background:rgba(0,191,165,.08);border:1px solid rgba(0,191,165,.15);border-radius:8px">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#4DB6AC;font-weight:700">6</div>
+            <div style="font-size:9px;color:#4DB6AC;font-family:'JetBrains Mono',monospace">GREEN</div>
+          </div>
+          <div style="text-align:center;padding:10px 6px;background:rgba(255,143,0,.08);border:1px solid rgba(255,143,0,.15);border-radius:8px">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#FFB74D;font-weight:700">52</div>
+            <div style="font-size:9px;color:#FFB74D;font-family:'JetBrains Mono',monospace">AMBER</div>
+          </div>
+          <div style="text-align:center;padding:10px 6px;background:rgba(244,67,54,.08);border:1px solid rgba(244,67,54,.15);border-radius:8px">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:24px;color:#EF9A9A;font-weight:700">0</div>
+            <div style="font-size:9px;color:#EF9A9A;font-family:'JetBrains Mono',monospace">RED</div>
+          </div>
+        </div>
+        <div class="dr"><span class="lbl">Avg accrued per worker</span><span class="val am">92.3 days</span></div>
+        <div class="dr"><span class="lbl">Workers &gt;60 days accrued</span><span class="val am">51 of 58</span></div>
+        <div class="dr"><span class="lbl">Workers &gt;100 days accrued</span><span class="val rb">29 workers</span></div>
+        <div class="dr"><span class="lbl">Currently on leave</span><span class="val em">0 workers</span></div>
+        <div style="margin-top:8px;padding:6px 10px;background:rgba(255,143,0,.06);border-radius:6px;font-size:10px;color:#FFB74D;font-family:'JetBrains Mono',monospace">UAE Art. 29: High accruals = cash liability on resignation</div>
+      </div>
+      <div class="card">
+        <div class="card-hd"><span class="cdot cd4"></span>Highest accruals — urgent action</div>
+        <div class="lv-row"><span class="lv-nm">Ayyappan</span><div class="lv-track"><div class="lv-bar" style="width:100%;background:linear-gradient(90deg,#B71C1C,#E53935)"></div></div><span class="lv-days" style="color:#EF9A9A">307d</span></div>
+        <div class="lv-row"><span class="lv-nm">Shameem</span><div class="lv-track"><div class="lv-bar" style="width:75%;background:linear-gradient(90deg,#C62828,#EF5350)"></div></div><span class="lv-days" style="color:#EF9A9A">229d</span></div>
+        <div class="lv-row"><span class="lv-nm">Jamsher Ansari</span><div class="lv-track"><div class="lv-bar" style="width:52%;background:#D32F2F"></div></div><span class="lv-days" style="color:#FFB74D">161d</span></div>
+        <div class="lv-row"><span class="lv-nm">Babu Day Bimal</span><div class="lv-track"><div class="lv-bar" style="width:51%;background:#C62828"></div></div><span class="lv-days" style="color:#FFB74D">157d</span></div>
+        <div class="lv-row"><span class="lv-nm">Nagesh</span><div class="lv-track"><div class="lv-bar" style="width:46%;background:#B71C1C"></div></div><span class="lv-days" style="color:#FFB74D">142d</span></div>
+        <div class="lv-row"><span class="lv-nm">Pervez Alam M</span><div class="lv-track"><div class="lv-bar" style="width:46%;background:#8D1515"></div></div><span class="lv-days" style="color:#FFB74D">141d</span></div>
+        <div class="lv-row"><span class="lv-nm">Haji Muhammad</span><div class="lv-track"><div class="lv-bar" style="width:45%;background:#6B0F0F"></div></div><span class="lv-days" style="color:#FFB74D">138d</span></div>
+        <div class="lv-row"><span class="lv-nm">N. Kallyan Shetty</span><div class="lv-track"><div class="lv-bar" style="width:44%;background:#5C0E0E"></div></div><span class="lv-days" style="color:#FFB74D">134d</span></div>
+        <div class="lv-row"><span class="lv-nm">Daniel Koshy</span><div class="lv-track"><div class="lv-bar" style="width:42%;background:#4A0B0B"></div></div><span class="lv-days" style="color:var(--muted)">129d</span></div>
+        <div class="lv-row"><span class="lv-nm">M. Firoz Miah</span><div class="lv-track"><div class="lv-bar" style="width:39%;background:#3D0909"></div></div><span class="lv-days" style="color:var(--muted)">119d</span></div>
+      </div>
+    </div>
+
+    <div class="section-label fi"><span></span>05 — AI action plan</div>
+    <div class="two-col fi" style="margin-bottom:12px">
+      <div>
+        <div class="ac t"><span class="ac-tag">DO TODAY</span><div><div class="ac-body">Renew 35 overdue labor cards and 21 overdue visas — assign to PRO team immediately. Every day of delay increases MOHRE fine exposure.</div><div class="ac-amt">AED 29,000+/month fine risk</div></div></div>
+        <div class="ac t"><span class="ac-tag">DO TODAY</span><div><div class="ac-body">Schedule Ayyappan (307 days) and Shameem (229 days) on mandatory leave. Resignation before scheduling = immediate large payout.</div><div class="ac-amt">Combined payout risk: AED 63,000+</div></div></div>
+        <div class="ac m"><span class="ac-tag">THIS MONTH</span><div><div class="ac-body">Create rolling leave calendar for 51 workers with over 60 days accrued. Target: reduce average from 92 to under 45 days by Q3 2026.</div><div class="ac-amt">Liability reduction: AED 180,000+</div></div></div>
+        <div class="ac m"><span class="ac-tag">THIS MONTH</span><div><div class="ac-body">Resolve 9 zero-EOSB employees — confirm exclusion or correct data. Unrecorded exposure: AED 31,213.</div><div class="ac-amt">AED 31,213 if not resolved</div></div></div>
+      </div>
+      <div>
+        <div class="ac s"><span class="ac-tag">STRATEGIC</span><div><div class="ac-body">Provision AED 575,193 to bridge ENG internal vs UAE law EOSB gap. Any employee claiming in court is entitled to the higher amount.</div><div class="ac-amt">Legal exposure: AED 575,193 (+16%)</div></div></div>
+        <div class="ac s"><span class="ac-tag">STRATEGIC</span><div><div class="ac-body">Establish EOSB reserve fund. Shuja Charoo alone = AED 302,507. Top 10 hold AED 1,207,865 (38% of total). Single unplanned exit = cash flow shock.</div><div class="ac-amt">Top 10 combined: AED 1,207,865</div></div></div>
+        <div class="ac s"><span class="ac-tag">STRATEGIC</span><div><div class="ac-body">59 employees (53%) have 10+ years service. EOSB accelerates at 30 days/year after year 5. Develop succession plan for critical roles before 2027.</div><div class="ac-amt">68% of total liability in this group</div></div></div>
+        <div class="card" style="border-left:2px solid var(--emerald);margin-top:0">
+          <div class="card-hd" style="font-size:13px"><span class="cdot cd2"></span>May 2026 payroll confirmed</div>
+          <div class="dr"><span class="lbl">Staff (50 employees)</span><span class="val">AED 374,650</span></div>
+          <div class="dr"><span class="lbl">Workers (62 employees)</span><span class="val">AED 112,263</span></div>
+          <div class="dr"><span class="lbl">Deductions</span><span class="val em">None — confirmed</span></div>
+          <div class="dt"><span>Total May 2026</span><span class="val">AED 486,913</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label fi"><span></span>06 — UAE law compliance</div>
+    <div class="comp-strip fi">
+      <div class="comp-cell"><div class="comp-lbl">Gratuity Art. 51</div><span class="badge a">MONITOR</span><div class="comp-note">9 zero-EOSB employees pending</div></div>
+      <div class="comp-cell"><div class="comp-lbl">Leave Art. 29</div><span class="badge a">MONITOR</span><div class="comp-note">51 workers high accrual</div></div>
+      <div class="comp-cell"><div class="comp-lbl">Documents MOHRE</div><span class="badge r">CRITICAL</span><div class="comp-note">58 overdue or ≤90 days</div></div>
+      <div class="comp-cell"><div class="comp-lbl">Payroll WPS</div><span class="badge g">COMPLIANT</span><div class="comp-note">May 2026 on schedule</div></div>
+    </div>
+
+  </div><!-- /dashboard -->
+
+  <!-- ══════════════════════════════════
+       RIGHT — CHAT PANEL
+       ══════════════════════════════════ -->
+  <div class="chat-panel" role="complementary" aria-label="HR COSMOS AI Assistant">
+
+    <div class="chat-header">
+      <div class="chat-header-top">
+        <div class="ai-avatar" aria-hidden="true">🤖</div>
+        <div>
+          <div class="chat-header-title">HR COSMOS Agent</div>
+          <div class="chat-header-sub">Claude AI · UAE Labour Law 33/2021</div>
+        </div>
+      </div>
+      <div class="chat-status" role="status">
+        <div class="pulse"></div>
+        112 employees loaded · All calculations ready · Ask anything
+      </div>
+    </div>
+
+    <div class="chat-messages" id="chatMessages" role="log" aria-live="polite" aria-label="Conversation">
+      <div class="msg ai">
+        <div class="msg-bubble">
+          Good day. I am <strong>HR COSMOS</strong>, your Emirates Neon Group HR intelligence agent.<br><br>
+          Your full workforce data is loaded — <span class="aed">112 employees</span>, net EOSB liability of <span class="aed">AED 3,244,079</span>, and all UAE labour law calculations ready.<br><br>
+          I can answer any HR question — gratuity, leave, payroll, compliance, document renewals, projections. Ask me anything.
+        </div>
+        <div class="msg-meta">
+          <div class="msg-time" aria-label="Sent at system ready">System ready</div>
+          <div class="msg-rag rag-g">ONLINE</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quick-wrap">
+      <div class="quick-label">Quick questions for CEO</div>
+      <div class="quick-grid">
+        <button class="qbtn" onclick="askQuick(this)" aria-label="Ask about biggest HR risk">What is our biggest HR risk right now?</button>
+        <button class="qbtn" onclick="askQuick(this)" aria-label="Ask about total EOSB">What is our total EOSB liability?</button>
+        <button class="qbtn" onclick="askQuick(this)" aria-label="Ask about document renewals">How urgent are our document renewals?</button>
+        <button class="qbtn" onclick="askQuick(this)" aria-label="Ask about workers leave">Which workers need leave most urgently?</button>
+        <button class="qbtn" onclick="askQuick(this)" aria-label="Ask about strategic actions">What are the 3 strategic actions for the board?</button>
+      </div>
+    </div>
+
+    <div class="chat-input-wrap">
+      <div class="input-row">
+        <button class="mic-btn" id="micBtn" onclick="toggleVoice()" aria-label="Voice input" title="Speak your question">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+    <line x1="12" y1="19" x2="12" y2="23"/>
+    <line x1="8" y1="23" x2="16" y2="23"/>
+  </svg>
+</button>
+        <div
+          class="chat-input"
+          id="chatInput"
+          contenteditable="true"
+          role="textbox"
+          aria-label="Type your HR question"
+          aria-multiline="true"
+          data-placeholder="Ask any HR question or press 🎤 to speak..."
+        ></div>
+        <button class="send-btn" id="sendBtn" onclick="sendMessage()" aria-label="Send message" title="Send">➤</button>
+      </div>
+      <div class="voice-status" id="voiceStatus" style="display:none">
+        <span class="voice-pulse"></span>
+        <span id="voiceStatusText">🎤 Listening… speak now, then <strong>press 🔴 again</strong> or <strong>wait</strong> to auto-send</span>
+      </div>
+      <div class="input-row" style="margin-top:6px;gap:6px">
+        <label class="voice-toggle">
+          <input type="checkbox" id="autoSpeak" checked onchange="toggleAutoSpeak()">
+          <span style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace">🔊 Auto-speak answers</span>
+        </label>
+        <button class="stop-btn" id="stopBtn" onclick="stopSpeaking()" style="display:none">⏹ Stop</button>
+      </div>
+      <div class="input-hint" id="inputHint">① Press 🎤 → ② Speak clearly → ③ Wait or press 🔴 to send</div>
+    </div>
+
+  </div><!-- /chat-panel -->
+
+</div><!-- /main -->
+
+<script>
+const API_KEY = ""; // Handled by Cloudflare Worker
+
+const SYSTEM = `You are HR COSMOS, the AI HR intelligence agent for Emirates Neon Group (ENG), UAE.
+You serve the CEO and HR team with 100% accurate answers from verified company data.
+
+ABSOLUTE RULES:
+1. ONLY use names and figures from the databases below. NEVER invent data.
+2. If employee not found, say: "Employee not found. Please check the code or name."
+3. Always produce MARKDOWN TABLES for any list, report, or salary sheet.
+4. For payroll reports include ALL employees in that category — do not stop early.
+5. AED figures first. UAE Law article second. Action last.
+
+═══ STAFF DATABASE — 55 employees (Code|Name|Category|Designation|Dept|Nationality|DOJ|Service|Basic|Gross|Gratuity|LeaveBal|PaidAdj|TotalEOSB|Passport|Visa|Labor) ═══
+2003|Shuja Charoo|Staff|Sales Director|Sales  Signage / Pro|Indian|02-Jun-2002|24.01yrs|Basic:12500|Gross:35000|Gratuity:281318|LeaveBal:60419|PaidAdj:38540|TotalEOSB:341737|Passport:22-Sep-2029|Visa:26-Mar-2027|Labor:25-May-2027
+2157|Fernando M Ramirez|Staff|Project Manager|Signage / Project|Filipino|05-Aug-2018|7.82yrs|Basic:8000|Gross:20000|Gratuity:50553|LeaveBal:14589|PaidAdj:79131|TotalEOSB:-19858|Passport:11-Oct-2030|Visa:03-Feb-2028|Labor:10-Jul-2026
+3778|Rajesh Dhummy Chandregowda|Staff|Sales Manager|Sales  Signage / Pro|Indian|07-Aug-2024|0.0yrs|Basic:6000|Gross:18000|Gratuity:0|LeaveBal:0|PaidAdj:0|TotalEOSB:0|Passport:11-Jul-2026|Visa:|Labor:
+2805|Mahmood Al Jabi|Staff|Project Sales Manage|Sales  Signage / Pro|Lebanese|01-Oct-2015|6.63yrs|Basic:10000|Gross:17500|Gratuity:51329|LeaveBal:78575|PaidAdj:37500|TotalEOSB:129904|Passport:30-May-2033|Visa:01-Nov-2027|Labor:23-Oct-2027
+979|Memon Rizwan Ismail|Staff|Chief Accountant|Finance & Accounts|Indian|23-Apr-1998|28.12yrs|Basic:10000|Gross:17000|Gratuity:240000|LeaveBal:13989|PaidAdj:26485|TotalEOSB:143989|Passport:08-Sep-2032|Visa:23-Oct-2027|Labor:09-May-2027
+3641|Samad Ur Rehman|Staff|Chief Financial Offi|Finance & Accounts|Pakistani|27-Oct-2019|6.59yrs|Basic:7000|Gross:15000|Gratuity:35642|LeaveBal:47363|PaidAdj:51514|TotalEOSB:83005|Passport:06-May-2034|Visa:30-Oct-2027|Labor:01-Nov-2027
+K001|Yasser Mohamed|Staff|Consultant|KSA|Egyptian|01-Jun-2023|0.0yrs|Basic:15000|Gross:15000|Gratuity:0|LeaveBal:0|PaidAdj:0|TotalEOSB:0|Passport:16-Aug-2026|Visa:20-Jun-2026|Labor:20-Jun-2026
+3746|Yasmeen Rasem Mohammad Saed|Staff|Executive Assistant|RM Office|Jordanian|21-Mar-2023|3.19yrs|Basic:5000|Gross:12000|Gratuity:11171|LeaveBal:0|PaidAdj:0|TotalEOSB:11171|Passport:17-Mar-2026|Visa:16-Feb-2027|Labor:11-Feb-2027
+3610|Gener Ignacio Sanchez|Staff|Project Engineer|Signage / Project|Filipino|18-Feb-2019|7.28yrs|Basic:4000|Gross:11000|Gratuity:23118|LeaveBal:38026|PaidAdj:29098|TotalEOSB:61144|Passport:16-Apr-2028|Visa:10-Oct-2027|Labor:29-Sep-2027
+3803|Krishna Moorthy|Staff|Senior Estimator|CAD & Estimation|Indian|07-May-2025|1.07yrs|Basic:3000|Gross:9250|Gratuity:2238|LeaveBal:0|PaidAdj:0|TotalEOSB:0|Passport:02-Apr-2028|Visa:15-May-2027|Labor:04-May-2027
+896|Kaleem Javeed|Staff|Senior Executive|Hr. & Admin|Indian|07-Sep-2000|25.74yrs|Basic:6000|Gross:9000|Gratuity:144000|LeaveBal:44765|PaidAdj:11702|TotalEOSB:163765|Passport:03-Dec-2034|Visa:29-May-2026|Labor:27-Aug-2026
+RY01|Vinoth Kajendran|Staff|Yacht Driver|RM Yacht|Indian|17-Mar-2013|13.21yrs|Basic:1750|Gross:8000|Gratuity:20489|LeaveBal:4447|PaidAdj:17054|TotalEOSB:24937|Passport:12-May-2034|Visa:21-Oct-2027|Labor:17-Oct-2027
+3571|Saeed Hassan Jasim|Staff|Public Relation Offi|Hr. & Admin|UAE|20-May-2018|0.0yrs|Basic:3000|Gross:8000|Gratuity:0|LeaveBal:23125|PaidAdj:9094|TotalEOSB:23125|Passport:28-Mar-2028|Visa:27-Dec-2026|Labor:20-Aug-2026
+3756|Salim Hussain Saeed Saifan Aldhaheri|Staff|Public Relation Offi|Hr & Admin|UAE|21-Jun-2023|0.0yrs|Basic:3000|Gross:8000|Gratuity:0|LeaveBal:22158|PaidAdj:1360|TotalEOSB:22158|Passport:16-Nov-2027|Visa:27-Dec-2028|Labor:20-Jun-2027
+RY01|Vinoth Kajendran|Staff|Yacht Driver|RM Yacht|Indian|21-Sep-2023|2.62yrs|Basic:1750|Gross:8000|Gratuity:3208|LeaveBal:20778|PaidAdj:8000|TotalEOSB:23987|Passport:05-Dec-2034|Visa:22-Oct-2027|Labor:18-Oct-2025
+3806|Anees Ahmed|Staff|Senior purchase|Purchase|Indian|22-May-2025|1.02yrs|Basic:2500|Gross:8000|Gratuity:1784|LeaveBal:0|PaidAdj:0|TotalEOSB:1784|Passport:05-Jul-2027|Visa:23-May-2027|Labor:
+1014|Rahman Ali Usman Ali|Staff|Sr.Hr & Admin. Execu|Hr & Admin|Indian|15-May-2002|24.05yrs|Basic:3000|Gross:7500|Gratuity:67664|LeaveBal:57280|PaidAdj:25350|TotalEOSB:124944|Passport:23-Jun-2034|Visa:18-Mar-2027|Labor:03-May-2027
+2008|Augustine Inbaraj David Sabanathan|Staff|Planning Engineer|Signage Production/ |Indian|11-Jun-2002|23.98yrs|Basic:4000|Gross:7250|Gratuity:89923|LeaveBal:69568|PaidAdj:11408|TotalEOSB:159492|Passport:06-Dec-2026|Visa:05-Aug-2027|Labor:30-May-2027
+3254|Haby Thomson|Staff|Project Engineer|Signage Production/ |Indian|16-Dec-2013|12.46yrs|Basic:2500|Gross:6750|Gratuity:27394|LeaveBal:47124|PaidAdj:26965|TotalEOSB:74518|Passport:29-Jul-2027|Visa:02-Mar-2027|Labor:09-Dec-2025
+1018|Alimullah Baig Safiullah|Staff|Office Administrator|ADH Office|Indian|09-Apr-2014|12.15yrs|Basic:2500|Gross:6750|Gratuity:26613|LeaveBal:51098|PaidAdj:15658|TotalEOSB:72711|Passport:29-Sep-2031|Visa:26-Oct-2026|Labor:29-Jul-2026
+3456|Deepu Omanakuttan|Staff|Senior AutoCAD Draug|CAD & Estimation|Indian|16-Oct-2023|2.27yrs|Basic:3000|Gross:6750|Gratuity:4758|LeaveBal:12539|PaidAdj:1755|TotalEOSB:17297|Passport:05-Dec-2032|Visa:21-Mar-2026|Labor:07-Mar-2026
+145|Mathramkott Velayudhan Subhas|Staff|Business Development|Sites Development|Indian|27-Mar-1988|38.2yrs|Basic:3500|Gross:6550|Gratuity:84000|LeaveBal:46211|PaidAdj:28424|TotalEOSB:130211|Passport:27-May-2026|Visa:13-Jun-2027|Labor:28-May-2026
+110|Syed Farhat Raza Zaidi|Staff|Installation Supervi|Signage Production/ |Pakistani|22-Jul-1995|30.88yrs|Basic:2500|Gross:6000|Gratuity:60000|LeaveBal:22719|PaidAdj:13870|TotalEOSB:82719|Passport:06-Dec-2031|Visa:26-Mar-2027|Labor:31-Jul-2027
+3314|Zaki Ahmed Siddiquie|Staff|Sr. Accountant|Finance & Accounts|Pakistani|19-Apr-2014|12.12yrs|Basic:2000|Gross:6000|Gratuity:21236|LeaveBal:22044|PaidAdj:20800|TotalEOSB:43280|Passport:11-Feb-2029|Visa:27-May-2026|Labor:28-May-2026
+1260|Muhammad Zubair|Staff|Supervisor- Traffic |Signage Production/ |Pakistani|24-May-2004|22.03yrs|Basic:1750|Gross:5500|Gratuity:35923|LeaveBal:13144|PaidAdj:22819|TotalEOSB:49067|Passport:20-Feb-2035|Visa:13-May-2027|Labor:10-May-2027
+3404|Saleem Shahezada|Staff|Quality Control Engi|Signage Production/ |Indian|27-Jul-2023|2.26yrs|Basic:2500|Gross:5000|Gratuity:3955|LeaveBal:8752|PaidAdj:1771|TotalEOSB:12707|Passport:11-Apr-2033|Visa:19-Apr-2026|Labor:11-Mar-2026
+22|Kazi Zakir Hussain|Staff|Supervisor-Print Pro|Print  Production|Bangladeshi|12-Feb-1998|28.31yrs|Basic:2000|Gross:4750|Gratuity:48000|LeaveBal:18005|PaidAdj:10387|TotalEOSB:66005|Passport:28-Nov-2028|Visa:11-Oct-2027|Labor:10-Feb-2027
+3659|Irfan Qaiser Bhatti|Staff|Accountant|Finance & Accounts|Pakistani|11-May-2020|6.05yrs|Basic:2000|Gross:4750|Gratuity:9104|LeaveBal:18804|PaidAdj:8726|TotalEOSB:26908|Passport:27-Apr-2031|Visa:15-Sep-2027|Labor:14-Sep-2027
+3812|Ashiq Ahamed|Staff|LED|LED Enginer|Indian|09-Jul-2025|0.64yrs|Basic:2500|Gross:4550|Gratuity:0|LeaveBal:0|PaidAdj:0|TotalEOSB:0|Passport:25-Feb-2030|Visa:12-Oct-2027|Labor:10-Jul-2027
+3808|Mahera Khurram|Staff|Personal Driver|RM|Pakistani|26-Sep-2024|1.67yrs|Basic:2000|Gross:4500|Gratuity:2340|LeaveBal:0|PaidAdj:0|TotalEOSB:2340|Passport:10-Aug-2032|Visa:01-Sep-2027|Labor:
+63|Sayed Mohammed Hashem|Staff|Production Superviso|Signage Production/ |Bangladeshi|03-Apr-1997|29.17yrs|Basic:1300|Gross:4250|Gratuity:31200|LeaveBal:6313|PaidAdj:5631|TotalEOSB:22513|Passport:09-Feb-2033|Visa:22-Mar-2027|Labor:28-May-2026
+1224|Asif Ahsan|Staff|Site Supervisor|Print  Installation|Pakistani|25-Feb-2004|22.27yrs|Basic:1250|Gross:4250|Gratuity:25964|LeaveBal:25691|PaidAdj:13253|TotalEOSB:51655|Passport:30-Jul-2035|Visa:02-Oct-2027|Labor:15-Feb-2027
+1199|Dil Bahadur Khadka|Staff|Assistant Store Keep|Purchase & Stores|Nepali|06-Dec-2003|22.49yrs|Basic:1000|Gross:4000|Gratuity:20993|LeaveBal:30386|PaidAdj:11904|TotalEOSB:51379|Passport:21-Mar-2033|Visa:07-May-2026|Labor:24-Nov-2026
+3810|Syed Majid Ali|Staff|Auto cad|CAD & Estimation|Indian|21-Oct-2025|0.6yrs|Basic:1500|Gross:4000|Gratuity:0|LeaveBal:0|PaidAdj:0|TotalEOSB:0|Passport:|Visa:|Labor:
+3728|Shobhit Bisht|Staff|Graphic Designer|Graphic Design|Indian|07-Nov-2022|2.6yrs|Basic:1750|Gross:3750|Gratuity:3188|LeaveBal:6634|PaidAdj:2826|TotalEOSB:9823|Passport:28-Sep-2032|Visa:30-Nov-2025|Labor:22-Oct-2025
+3751|Sumaira Ameer|Staff|Secretary|MD'S Office-Dubai|Pakistani|05-Jun-2023|2.98yrs|Basic:1750|Gross:3750|Gratuity:3655|LeaveBal:8795|PaidAdj:0|TotalEOSB:12449|Passport:22-Mar-2033|Visa:11-Mar-2026|Labor:05-Feb-2026
+3752|Aqsa Hameed|Staff|Secretary|MD'S Office-Dubai|Pakistani|05-Jun-2023|2.98yrs|Basic:1750|Gross:3750|Gratuity:3655|LeaveBal:11188|PaidAdj:0|TotalEOSB:14843|Passport:20-Oct-2027|Visa:05-Aug-2027|Labor:10-Jul-2027
+2482|Aasim Raza|Staff|Graphic Designer|Graphic Design|Indian|02-Aug-2023|2.26yrs|Basic:1100|Gross:3750|Gratuity:1740|LeaveBal:4276|PaidAdj:3733|TotalEOSB:6016|Passport:22-Jul-2031|Visa:03-Apr-2026|Labor:18-Mar-2026
+2455|Mohammad Ashique Khan|Staff|Senior Team Leader|Signage Production/ |Indian|23-Mar-2005|21.2yrs|Basic:1250|Gross:3500|Gratuity:24622|LeaveBal:12687|PaidAdj:8055|TotalEOSB:37308|Passport:02-May-2034|Visa:29-Jul-2027|Labor:12-Mar-2027
+3003|Muhammad Ashraf|Staff|Transport Coordinato|Signage Production/ |Pakistani|13-Jan-2008|18.39yrs|Basic:1250|Gross:3250|Gratuity:21108|LeaveBal:-297|PaidAdj:12986|TotalEOSB:20811|Passport:06-Jun-2027|Visa:06-Dec-2025|Labor:03-Jan-2027
+3460|Sabu Vattachirayil Appi|Staff|Office Driver|Admin Outdoor|Indian|26-Oct-2016|9.59yrs|Basic:1200|Gross:3250|Gratuity:9713|LeaveBal:4928|PaidAdj:4225|TotalEOSB:14642|Passport:01-Aug-2032|Visa:04-Dec-2026|Labor:20-Oct-2026
+1016|Mansoor Umer Shaikh|Staff|Hr. Assistant|Hr. & Admin|Indian|10-Jan-2000|26.4yrs|Basic:1000|Gross:3000|Gratuity:24000|LeaveBal:1234|PaidAdj:6447|TotalEOSB:22234|Passport:12-Sep-2026|Visa:28-Apr-2027|Labor:30-Dec-2026
+2785|Faruk Ahmed|Staff|Supervisor|Print  Installation|Bangladeshi|15-Aug-2006|19.8yrs|Basic:1050|Gross:3000|Gratuity:19215|LeaveBal:20980|PaidAdj:14880|TotalEOSB:40195|Passport:15-Nov-2026|Visa:27-Jul-2027|Labor:04-Aug-2026
+3800|Randheer  Radhakrishnan|Staff|IT Executive|IT|Indian|24-Mar-2025|1.18yrs|Basic:1500|Gross:3000|Gratuity:1240|LeaveBal:0|PaidAdj:0|TotalEOSB:1240|Passport:17-Dec-2034|Visa:18-Mar-2027|Labor:16-Mar-2027
+3454|Umar Javed|Staff|Vinyl Applicator/Mac|Print  Production|Pakistani|17-Oct-2016|9.62yrs|Basic:1000|Gross:2750|Gratuity:8119|LeaveBal:6886|PaidAdj:1161|TotalEOSB:15005|Passport:27-Dec-2033|Visa:24-Feb-2027|Labor:14-Oct-2026
+3744|Hussain Nizami Bhangad Khaja|Staff|Office Driver|Admin Outdoor|Indian|09-Mar-2023|2.27yrs|Basic:1250|Gross:2750|Gratuity:1983|LeaveBal:4463|PaidAdj:0|TotalEOSB:6445|Passport:09-Mar-2029|Visa:20-Mar-2026|Labor:07-Mar-2026
+3652|Riyaz Ali|Staff|Driver|MD'S Residence|Indian|15-Jan-2020|6.37yrs|Basic:1000|Gross:2500|Gratuity:4873|LeaveBal:4774|PaidAdj:0|TotalEOSB:9647|Passport:06-Dec-2032|Visa:23-Mar-2026|Labor:12-Jan-2026
+3365|Tanveer Ahmed|Staff|Driver|MD'S Residence|Pakistani|23-Dec-2017|8.44yrs|Basic:1200|Gross:2450|Gratuity:8323|LeaveBal:14929|PaidAdj:2900|TotalEOSB:23252|Passport:08-Feb-2033|Visa:29-Mar-2027|Labor:27-Dec-2025
+MR11|Muhammad Khalil|Staff|Cook|MD'S Office-Dubai|Pakistani|05-May-2024|2.07yrs|Basic:1000|Gross:2300|Gratuity:1446|LeaveBal:4751|PaidAdj:0|TotalEOSB:4751|Passport:01-May-2028|Visa:30-May-2026|Labor:19-May-2026
+RY04|Ajithkumar Annamalai|Staff|Yacht  Assistant|RM Yacht|Indian|24-Nov-2022|3.51yrs|Basic:1000|Gross:2000|Gratuity:2459|LeaveBal:3025|PaidAdj:4000|TotalEOSB:5483|Passport:02-Aug-2027|Visa:17-Oct-2027|Labor:14-Oct-2027
+RY05|Sasikumar Kolanjiyappan|Staff|Engine Operator|RM Yacht|Indian|13-Feb-2024|2.29yrs|Basic:1000|Gross:2000|Gratuity:1603|LeaveBal:4005|PaidAdj:0|TotalEOSB:5609|Passport:16-Nov-2033|Visa:26-Apr-2026|Labor:01-Mar-2026
+MR02|Ashique Shamshuddin Muskhan|Staff|Helper|MD'S Residence|Indian|28-Feb-2005|21.26yrs|Basic:700|Gross:1800|Gratuity:13832|LeaveBal:8093|PaidAdj:0|TotalEOSB:21925|Passport:09-Feb-2028|Visa:20-Aug-2027|Labor:12-Mar-2027
+MR03|Kamal Yeasin Sardar|Staff|Watchman|MD'S Residence|Bangladeshi|28-May-2008|18.01yrs|Basic:900|Gross:1800|Gratuity:14862|LeaveBal:4291|PaidAdj:5000|TotalEOSB:19153|Passport:07-Jun-2033|Visa:12-Sep-2025|Labor:03-Nov-2025
+3723|Mohammed Zameer Hussain|Staff|Stores Assistant|Purchase & Stores|Indian|26-Sep-2022|2.27yrs|Basic:1000|Gross:1650|Gratuity:1586|LeaveBal:3491|PaidAdj:0|TotalEOSB:5078|Passport:19-Nov-2035|Visa:17-May-2026|Labor:07-Mar-2026
+AR02|Imtiaz Khan|Staff|Cook|Aman's Residence|Pakistani|27-Apr-2014|12.1yrs|Basic:800|Gross:1600|Gratuity:8477|LeaveBal:3551|PaidAdj:0|TotalEOSB:12027|Passport:17-Jul-2027|Visa:09-Jun-2026|Labor:23-Feb-2026
+
+═══ WORKERS DATABASE — 60 employees (Code|Name|Category|Designation|Dept|Nationality|DOJ|Service|Basic|Gross|Gratuity|LeaveBal|PaidAdj|TotalEOSB|Passport|Visa|Labor) ═══
+57|Shamim Abdul Rashid|Worker|Senior Technician|Projects /Alum. Fabr|Bangladeshi|29-Sep-1996|29.68yrs|Basic:1600|Gross:2950|Gratuity:38400|LeaveBal:10258|PaidAdj:15270|TotalEOSB:48658|Passport:07-Nov-2026|Visa:04-May-2027|Labor:07-Oct-2027
+2531|Nazir Ali|Worker|Heavy  Vehicle Drive|Drivers-Production|Pakistani|22-Aug-2005|20.78yrs|Basic:1500|Gross:2750|Gratuity:28921|LeaveBal:9472|PaidAdj:0|TotalEOSB:38393|Passport:24-Jun-2034|Visa:10-Oct-2025|Labor:18-Jan-2028
+2273|Anamul Haque|Worker|Electrician/Team Lea|Installation - Neon|Bangladeshi|02-Jun-2004|22.0yrs|Basic:1400|Gross:2550|Gratuity:28704|LeaveBal:14540|PaidAdj:1400|TotalEOSB:43244|Passport:21-Mar-2028|Visa:29-Mar-2027|Labor:28-Oct-2025
+2876|Anisur Monirul Hoque Bhuiyan|Worker|Technician|Router|Bangladeshi|12-Jun-2008|17.97yrs|Basic:1000|Gross:2550|Gratuity:16473|LeaveBal:22656|PaidAdj:1000|TotalEOSB:39128|Passport:06-Nov-2026|Visa:03-May-2027|Labor:02-Jun-2027
+46|Mamrez Ali|Worker|Site Installer/Team |Capex|Pakistani|30-May-1998|28.02yrs|Basic:1250|Gross:2500|Gratuity:30000|LeaveBal:6990|PaidAdj:6775|TotalEOSB:26990|Passport:22-Nov-2031|Visa:29-Mar-2027|Labor:25-May-2027
+1021|Ram Prashad Nandy|Worker|Plastican|Plastic|Bangladeshi|28-Oct-2003|22.6yrs|Basic:1300|Gross:2500|Gratuity:27430|LeaveBal:19513|PaidAdj:5550|TotalEOSB:46943|Passport:21-Jun-2026|Visa:29-Mar-2027|Labor:21-Oct-2026
+3282|Mohammad Arman|Worker|Electrician / Team L|Maintenance  Outdoor|Indian|05-Mar-2014|12.24yrs|Basic:1000|Gross:2450|Gratuity:10741|LeaveBal:15415|PaidAdj:3300|TotalEOSB:26156|Passport:03-Sep-2031|Visa:06-Jul-2026|Labor:28-May-2026
+3280|Adil Khan|Worker|Electrician|Maintenance - In Hou|Indian|05-Mar-2014|12.24yrs|Basic:1000|Gross:2450|Gratuity:10741|LeaveBal:10117|PaidAdj:3100|TotalEOSB:20858|Passport:11-Jul-2034|Visa:06-Jul-2026|Labor:28-May-2026
+3497|Visu Natarajan|Worker|Generator Mechanic|Maintenance - In Hou|Indian|04-Feb-2017|9.32yrs|Basic:1200|Gross:2450|Gratuity:9381|LeaveBal:11550|PaidAdj:6003|TotalEOSB:20931|Passport:17-Mar-2030|Visa:14-May-2027|Labor:28-Jan-2027
+3436|Hassan Ali|Worker|Sign Fitter/Team Lea|Installation - Outdo|Pakistani|15-Feb-2020|6.29yrs|Basic:1100|Gross:2450|Gratuity:5266|LeaveBal:1868|PaidAdj:3851|TotalEOSB:7135|Passport:18-Nov-2035|Visa:29-Mar-2026|Labor:10-Feb-2026
+1017|Mohamed Husain|Worker|Senior Metal Smith/T|Metal|Indian|16-Jan-2001|31.43yrs|Basic:1400|Gross:2400|Gratuity:33600|LeaveBal:16134|PaidAdj:1700|TotalEOSB:49734|Passport:28-Feb-2035|Visa:12-Aug-2027|Labor:04-Jan-2027
+2316|Salahuddin|Worker|Electrician|Maintenance  Service|Bangladeshi|12-Jul-2008|17.89yrs|Basic:1000|Gross:2350|Gratuity:16390|LeaveBal:15546|PaidAdj:6500|TotalEOSB:31936|Passport:25-Jun-2027|Visa:29-Mar-2027|Labor:03-Jul-2027
+2930|Ansari Mohammad Alam|Worker|Electrician|Installation - Neon|Indian|05-Feb-2007|19.32yrs|Basic:1200|Gross:2300|Gratuity:21388|LeaveBal:17359|PaidAdj:7190|TotalEOSB:38747|Passport:19-Mar-2035|Visa:29-Mar-2027|Labor:22-Apr-2027
+173|Nizar Ali|Worker|Sr. Plastican|Plastic|Pakistani|14-Jul-1992|33.9yrs|Basic:1300|Gross:2250|Gratuity:31200|LeaveBal:17947|PaidAdj:5050|TotalEOSB:49147|Passport:28-Nov-2027|Visa:29-Mar-2029|Labor:25-Jul-2027
+2993|Hassan Ali Kasem Ali|Worker|Electro Plator|Plastic|Bangladeshi|08-Dec-2007|17.48yrs|Basic:1400|Gross:2250|Gratuity:22375|LeaveBal:14916|PaidAdj:4000|TotalEOSB:32191|Passport:07-Nov-2026|Visa:07-Mar-2027|Labor:27-Nov-2026
+3325|Mohammad Taz Ansari|Worker|Electrician/Team Lea|Installation - Outdo|Indian|24-Jun-2014|11.94yrs|Basic:1000|Gross:2250|Gratuity:10437|LeaveBal:15342|PaidAdj:6950|TotalEOSB:25779|Passport:12-Aug-2035|Visa:30-Mar-2027|Labor:17-Jun-2026
+3372|Muhammad Naveed|Worker|Vinyl Applicator|Building Wrap|Pakistani|04-Apr-2015|11.16yrs|Basic:1000|Gross:2250|Gratuity:9659|LeaveBal:3757|PaidAdj:11593|TotalEOSB:13416|Passport:16-Jan-2028|Visa:15-Nov-2027|Labor:28-Mar-2027
+175|Haji Muhammed|Worker|Light Vehicle Driver|Drivers-Production|Pakistani|08-Apr-1999|27.16yrs|Basic:1400|Gross:2200|Gratuity:33600|LeaveBal:8652|PaidAdj:1270|TotalEOSB:42252|Passport:24-Oct-2032|Visa:11-Apr-2027|Labor:26-Mar-2027
+1159|Byju Jayan Leela|Worker|Moulder|Steel Fabrication|Indian|23-Oct-2003|22.61yrs|Basic:1000|Gross:2200|Gratuity:21114|LeaveBal:21112|PaidAdj:3703|TotalEOSB:42226|Passport:02-May-2031|Visa:06-Dec-2027|Labor:12-Oct-2026
+3286|Jahid Ali|Worker|Electrician|Installation - Neon|Indian|16-Mar-2014|12.21yrs|Basic:1000|Gross:2200|Gratuity:10711|LeaveBal:14418|PaidAdj:1850|TotalEOSB:25129|Passport:17-Mar-2033|Visa:26-Jun-2026|Labor:28-May-2026
+155|Golam Mohammad|Worker|Light Vehicle Driver|Drivers-Production|Bangladeshi|25-Sep-1991|34.7yrs|Basic:1250|Gross:2150|Gratuity:30000|LeaveBal:18756|PaidAdj:3285|TotalEOSB:48756|Passport:14-Dec-2026|Visa:28-Jul-2027|Labor:09-Oct-2026
+1192|Mohammad Firoz Miah|Worker|Welder|Steel Fabrication|Bangladeshi|22-Nov-2003|22.53yrs|Basic:1000|Gross:2150|Gratuity:21032|LeaveBal:21328|PaidAdj:0|TotalEOSB:42359|Passport:02-Oct-2035|Visa:12-Dec-2027|Labor:06-Jan-2028
+2375|Muhammad Ashraf|Worker|Light Vehicle Driver|Drivers-Production|Pakistani|28-Dec-2005|20.43yrs|Basic:1250|Gross:2150|Gratuity:23663|LeaveBal:6539|PaidAdj:0|TotalEOSB:30202|Passport:16-Sep-2026|Visa:07-Mar-2027|Labor:17-Dec-2026
+2318|Ala Uddin|Worker|Metal Smith|Metal|Bangladeshi|09-Jan-2007|21.85yrs|Basic:1050|Gross:2150|Gratuity:21364|LeaveBal:20212|PaidAdj:2400|TotalEOSB:41576|Passport:06-Nov-2026|Visa:07-Mar-2027|Labor:21-Nov-2026
+887|Gauhar Ali|Worker|Plastican|Plastic|Indian|24-Aug-2000|25.78yrs|Basic:1200|Gross:2100|Gratuity:28800|LeaveBal:14889|PaidAdj:5633|TotalEOSB:43689|Passport:18-Mar-2029|Visa:26-Jul-2027|Labor:12-Aug-2026
+1058|Yam Bahadur Bhujel|Worker|Team Leader|Steel Fabrication|Nepali|23-May-2002|24.03yrs|Basic:800|Gross:2100|Gratuity:18026|LeaveBal:14915|PaidAdj:3450|TotalEOSB:32941|Passport:07-Dec-2034|Visa:19-Nov-2027|Labor:13-May-2027
+1185|Min Bahadur Pokharel|Worker|Pretreatment Optr/Te|Capex|Nepali|06-Nov-2003|22.58yrs|Basic:900|Gross:2100|Gratuity:18968|LeaveBal:21922|PaidAdj:2000|TotalEOSB:40890|Passport:27-Mar-2033|Visa:29-Apr-2026|Labor:26-Oct-2026
+2772|Jashim Goni Miah|Worker|Tensioner|Tensioning|Bangladeshi|31-Jul-2006|22.97yrs|Basic:1100|Gross:2050|Gratuity:23614|LeaveBal:17256|PaidAdj:4951|TotalEOSB:40870|Passport:03-Oct-2027|Visa:15-Nov-2027|Labor:04-Aug-2026
+3284|Akhlaqur Rahman|Worker|Electrician|Maintenance  Service|Indian|08-Mar-2014|12.23yrs|Basic:1000|Gross:2050|Gratuity:10733|LeaveBal:12075|PaidAdj:0|TotalEOSB:22808|Passport:07-Sep-2030|Visa:30-Jun-2026|Labor:28-May-2026
+3306|Logeswaran Chellathurai|Worker|Electrician|Capex|Indian|09-Apr-2014|12.15yrs|Basic:1000|Gross:2050|Gratuity:10645|LeaveBal:20642|PaidAdj:0|TotalEOSB:31287|Passport:01-Sep-2033|Visa:05-Jul-2026|Labor:28-May-2026
+3348|Md Jahangir|Worker|Electrician|Installation - Neon|Indian|17-Dec-2014|11.45yrs|Basic:1000|Gross:2050|Gratuity:9955|LeaveBal:14796|PaidAdj:2437|TotalEOSB:24751|Passport:28-Dec-2033|Visa:31-Mar-2027|Labor:10-Dec-2026
+3569|Wajid Ali|Worker|Sign Fitter|Installation - Outdo|Pakistani|10-May-2018|8.06yrs|Basic:1000|Gross:2050|Gratuity:6558|LeaveBal:14658|PaidAdj:1800|TotalEOSB:21215|Passport:19-Oct-2030|Visa:01-Jul-2026|Labor:28-May-2026
+3645|Muhammad Nazir Khan|Worker|Heavy/Ltv  Driver|Drivers-Production|Pakistani|02-Feb-2019|6.53yrs|Basic:1200|Gross:2050|Gratuity:6031|LeaveBal:7943|PaidAdj:6950|TotalEOSB:13974|Passport:28-Aug-2031|Visa:29-Mar-2026|Labor:04-Nov-2025
+3674|Shalauddin|Worker|Site Insttaler|Electrical|Indian|24-Nov-2020|5.17yrs|Basic:1000|Gross:2050|Gratuity:3673|LeaveBal:5220|PaidAdj:5900|TotalEOSB:8893|Passport:14-May-2029|Visa:07-Jul-2027|Labor:25-Mar-2027
+3681|Mohammad Sonu|Worker|Electrician|Capex|Indian|10-Dec-2020|5.17yrs|Basic:1000|Gross:2050|Gratuity:3673|LeaveBal:6505|PaidAdj:0|TotalEOSB:10178|Passport:30-May-2029|Visa:07-Jun-2027|Labor:25-Mar-2027
+178|Gul Nazir|Worker|Helper|Ink Jet|Pakistani|28-Aug-1992|33.77yrs|Basic:1200|Gross:2000|Gratuity:28800|LeaveBal:5690|PaidAdj:0|TotalEOSB:34490|Passport:16-Sep-2026|Visa:03-May-2027|Labor:10-Aug-2027
+3324|Muhammad Imran|Worker|Light Vehicle Driver|Drivers-Production|Pakistani|05-Jun-2014|11.99yrs|Basic:1200|Gross:2000|Gratuity:12587|LeaveBal:10724|PaidAdj:9000|TotalEOSB:23311|Passport:09-Jul-2028|Visa:03-May-2027|Labor:28-May-2026
+3512|Ranjit Kumar Singh|Worker|Welder|Capex|Indian|02-Apr-2017|9.16yrs|Basic:1200|Gross:2000|Gratuity:9194|LeaveBal:12307|PaidAdj:5870|TotalEOSB:21501|Passport:25-Apr-2029|Visa:07-Mar-2027|Labor:27-Mar-2027
+3518|Manshi Kumar Sharma|Worker|Welder|Capex|Indian|23-Apr-2017|9.1yrs|Basic:1200|Gross:2000|Gratuity:9125|LeaveBal:12090|PaidAdj:5972|TotalEOSB:21215|Passport:20-Dec-2026|Visa:07-Mar-2027|Labor:17-Apr-2027
+1385|Dainel Kurisummoottil Koshy|Worker|Fitter|Capex|Indian|24-Jun-2006|19.94yrs|Basic:1000|Gross:1950|Gratuity:18442|LeaveBal:15870|PaidAdj:0|TotalEOSB:34312|Passport:06-Oct-2032|Visa:05-Dec-2027|Labor:12-Jun-2028
+2975|Babu Day Bimal Chandra Dey|Worker|Painter|Painting|Bangladeshi|27-Oct-2007|18.6yrs|Basic:1000|Gross:1950|Gratuity:17100|LeaveBal:10853|PaidAdj:5832|TotalEOSB:27953|Passport:21-Apr-2030|Visa:04-May-2027|Labor:15-Oct-2027
+3301|Murinhayakkal Babu Rajan|Worker|Aluminium Fabricator|Vinyl Pasting|Indian|05-Apr-2014|12.16yrs|Basic:1000|Gross:1950|Gratuity:10656|LeaveBal:15656|PaidAdj:4143|TotalEOSB:26312|Passport:08-Oct-2029|Visa:05-Jul-2026|Labor:28-May-2026
+3692|Mohammad Asif Khan|Worker|Electrician|Vinyl Pasting|Indian|06-Feb-2021|4.3yrs|Basic:1000|Gross:1950|Gratuity:3011|LeaveBal:4498|PaidAdj:3750|TotalEOSB:7509|Passport:31-Jul-2028|Visa:16-Oct-2026|Labor:13-Feb-2026
+2441|Mohammad Perwez Alam|Worker|Vinyl Applicator|Vinyl Pasting|Indian|23-Mar-2005|21.2yrs|Basic:1100|Gross:1900|Gratuity:21667|LeaveBal:6788|PaidAdj:2200|TotalEOSB:28455|Passport:12-Jul-2027|Visa:06-Feb-2027|Labor:12-Mar-2027
+3020|Muhammad Nisar|Worker|Electrician|Electrical|Pakistani|20-Feb-2008|18.28yrs|Basic:950|Gross:1900|Gratuity:15943|LeaveBal:6930|PaidAdj:6767|TotalEOSB:22873|Passport:07-Dec-2027|Visa:07-Mar-2027|Labor:09-Feb-2027
+3657|Imran Ali|Worker|Sign Fitter|Installation - Outdo|Pakistani|25-Jan-2020|6.35yrs|Basic:1000|Gross:1900|Gratuity:4845|LeaveBal:5301|PaidAdj:6700|TotalEOSB:10146|Passport:31-Jan-2029|Visa:29-Mar-2026|Labor:20-Jan-2026
+2898|Mohammed Syedul Huque|Worker|Asst. Electrician|Maintenance  Service|Bangladeshi|25-May-2008|18.02yrs|Basic:800|Gross:1850|Gratuity:13218|LeaveBal:12004|PaidAdj:3300|TotalEOSB:25222|Passport:07-Nov-2026|Visa:29-Mar-2027|Labor:16-May-2027
+3269|Dayamon Podiyan|Worker|Welder|Steel Fabrication|Indian|18-Feb-2014|12.28yrs|Basic:1200|Gross:1850|Gratuity:12939|LeaveBal:13712|PaidAdj:5150|TotalEOSB:26651|Passport:23-Jan-2028|Visa:07-Mar-2027|Labor:11-Feb-2026
+1496|Ayyappan Swamy|Worker|Welder|Steel Fabrication|Indian|03-Mar-2016|10.24yrs|Basic:1200|Gross:1850|Gratuity:10493|LeaveBal:18791|PaidAdj:0|TotalEOSB:29284|Passport:20-Jul-2027|Visa:03-May-2027|Labor:28-May-2026
+1498|Selvarajan Antony|Worker|Welder|Steel Fabrication|Indian|24-Sep-2016|9.68yrs|Basic:1200|Gross:1850|Gratuity:9819|LeaveBal:12752|PaidAdj:5000|TotalEOSB:22571|Passport:05-Feb-2028|Visa:24-Feb-2027|Labor:18-Sep-2026
+3482|Muhammad Aliulla|Worker|Vinyl Applicator|Tensioning|Indian|28-Nov-2016|9.5yrs|Basic:1000|Gross:1850|Gratuity:8004|LeaveBal:12163|PaidAdj:5366|TotalEOSB:20167|Passport:25-Apr-2035|Visa:07-Mar-2027|Labor:22-Nov-2026
+3553|Faisal Shahani|Worker|Vinyl Applicator|Vehicle Graphic|Pakistani|06-Feb-2018|8.31yrs|Basic:1000|Gross:1850|Gratuity:6812|LeaveBal:7038|PaidAdj:3000|TotalEOSB:13850|Passport:24-Sep-2029|Visa:03-May-2027|Labor:01-Feb-2026
+2962|Babasaheb Ayub Banekar|Worker|Machine Operator Ass|Ink Jet|Indian|25-Nov-2018|7.51yrs|Basic:1000|Gross:1850|Gratuity:6012|LeaveBal:11205|PaidAdj:2650|TotalEOSB:17217|Passport:13-Nov-2032|Visa:05-Dec-2027|Labor:05-Feb-2027
+3656|Ahsan Raza|Worker|Vinyl Applicator|Installation - Outdo|Pakistani|25-Jan-2020|6.35yrs|Basic:1000|Gross:1850|Gratuity:4845|LeaveBal:4295|PaidAdj:7390|TotalEOSB:9141|Passport:31-Jan-2029|Visa:29-Mar-2026|Labor:26-Jan-2026
+3711|Abdul Vahab|Worker|Welder/Fabricator|Metal|Indian|08-Mar-2022|3.65yrs|Basic:1000|Gross:1850|Gratuity:2556|LeaveBal:2761|PaidAdj:3835|TotalEOSB:5318|Passport:13-Feb-2030|Visa:04-Dec-2026|Labor:19-Oct-2026
+3684|Sugin Rajaretnam|Worker|Mechanic|Maintenance - In Hou|Indian|30-Dec-2020|5.2yrs|Basic:1200|Gross:1750|Gratuity:4440|LeaveBal:2064|PaidAdj:7285|TotalEOSB:6504|Passport:09-Jul-2034|Visa:13-Jul-2027|Labor:25-Mar-2027
+0077|Jakir Hossain|Worker|Vinyl Applicator|Installation - Neon|Bangladeshi|04-Jan-2021|5.19yrs|Basic:1000|Gross:1750|Gratuity:3692|LeaveBal:5301|PaidAdj:3999|TotalEOSB:8993|Passport:04-Sep-2034|Visa:20-Jul-2027|Labor:27-Mar-2027
+3672|Meraj Khan|Worker|Painter|Painting|Indian|01-Dec-2023|2.49yrs|Basic:1000|Gross:1750|Gratuity:1745|LeaveBal:0|PaidAdj:0|TotalEOSB:1745|Passport:03-Feb-2030|Visa:05-Mar-2027|Labor:28-Feb-2027
+1371|Nagaraj Kallyan Shetty|Worker|Spray Painter|Painting|Indian|25-Jul-2018|7.85yrs|Basic:1200|Gross:1650|Gratuity:7616|LeaveBal:9809|PaidAdj:3000|TotalEOSB:17425|Passport:26-Jan-2028|Visa:08-May-2025|Labor:06-Feb-2025
+3599|Syed Naveed Ahmed|Worker|Technical Helper|Hr & Admin|Pakistani|27-Nov-2018|7.51yrs|Basic:900|Gross:1450|Gratuity:5406|LeaveBal:4276|PaidAdj:3430|TotalEOSB:9682|Passport:27-Nov-2034|Visa:29-Mar-2026|Labor:29-Sep-2027
+
+═══ PAYROLL SUMMARY — MAY 2026 ═══
+Staff (55): Total Basic AED 209,600 | Total Gross AED 374,650
+Workers (60): Total Basic AED 65,650 | Total Gross AED 112,263
+COMBINED TOTAL: AED 486,913 | No deductions this month
+
+═══ EOSB SUMMARY ═══
+Net EOSB balance: AED 3,244,079 | Monthly accrual: AED 15,807
+12-month projection: AED 3,433,763 | UAE vs ENG gap: AED 575,193 (+16%)
+Excluded: Schria Manu (136), Zulfiqar Kamal (2471) — management decision
+
+═══ WORKERS LEAVE ═══
+52 AMBER (>60 days) | 6 GREEN | Avg: 92.3 days
+Urgent: Ayyappan(1496) 307d | Shameem(57) 229d | Jamsher Ansari 161d
+
+═══ UAE LAW ═══
+Art.51: Basic/30 × 21d × yrs (≤5yrs) + Basic/30 × 30d × remaining. Cap = 24 months basic.
+Art.29: 30 days leave/year. Encashment = Gross/365 × days balance.
+Art.43: Notice 30 days min. Art.38: Sick leave 90 days max.
+MOHRE: AED 500/document/month fine for expired documents.
+
+═══ REPORT COMMANDS ═══
+Workers payroll → ALL 60 workers table: #|Code|Name|Dept|Basic|Gross (sorted gross desc)
+Staff payroll → ALL 55 staff table: #|Code|Name|Dept|Basic|Gross (sorted gross desc)
+Full payroll → ALL 115 employees both categories
+Top N salaries → top N by gross across all employees
+Bottom N salaries → bottom N by gross
+Salary ranking → all 115 sorted by gross desc
+EOSB report → Code|Name|Gratuity|LeaveBal|Deductions|NetEOSB
+Document alerts → Code|Name|Passport|Visa|Labor|Status
+Dept payroll → filter by department name
+80% compliance → sort ascending, find 80% threshold
+
+═══ FFS FORMAT ═══
+When asked FFS/Full and Final Settlement for [name or code]:
+Find the employee and produce:
+
+**FULL & FINAL SETTLEMENT — EMIRATES NEON GROUP**
+Date: [today]
+
+| Employee Details | |
+|---|---|
+| Name | [name] |
+| Code | [code] |
+| Designation | [designation] |
+| Department | [dept] |
+| Date of Joining | [doj] |
+| Last Working Day | [lwd or Active] |
+| Service | [years] years |
+| Nationality | [nationality] |
+
+| Settlement Calculation | AED |
+|---|---|
+| Gratuity (UAE Art.51) | [gratuity] |
+| Leave Salary Balance | [leave_bal] |
+| **Gross Entitlement** | **[gratuity + leave_bal]** |
+| Less: Paid & Adjustments | ([paid_adj]) |
+| Less: Leave Salary Fines | ([fines_ls]) |
+| Less: TDR/Short Hours | ([ded_tdr]) |
+| Less: Other Fines | ([fines]) |
+| **NET EOSB PAYABLE** | **[total_eosb]** |
+
+| Salary Structure | Monthly AED |
+|---|---|
+| Basic | [basic] |
+| HRA | [hra] |
+| Conveyance | [conv] |
+| Allowances | [allow] |
+| **Total Gross** | **[gross]** |
+
+Remarks: [remarks]
+Documents: Passport expires [passport] | Visa expires [visa] | Labor expires [labor]
+
+*Prepared by: Kaleem Javeed | Checked by: Zaki Ahmed | Reviewed by: Samad Ur Rehman | Approved by: MD/GCEO*
+*UAE Federal Decree-Law No. 33 of 2021 — Confidential*`;
+
+let history = [];
+let loading = false;
+
+function now() {
+  return new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+}
+
+function scrollDown() {
+  const m = document.getElementById('chatMessages');
+  setTimeout(()=>{ m.scrollTop = m.scrollHeight; }, 50);
+}
+
+function formatResponse(html) {
+  // Convert markdown tables to HTML tables
+  html = html.replace(/\|(.+)\|\n\|[-| ]+\|\n((?:\|.+\|\n?)+)/g, function(match, header, rows) {
+    const headers = header.split('|').filter(h => h.trim()).map(h => `<th>${h.trim()}</th>`).join('');
+    const dataRows = rows.trim().split('\n').map(row => {
+      const cells = row.split('|').filter(c => c.trim() !== '').map(c => `<td>${c.trim()}</td>`).join('');
+      return `<tr>${cells}</tr>`;
+    }).join('');
+    return `<div class="tbl-wrap"><table class="ai-table"><thead><tr>${headers}</tr></thead><tbody>${dataRows}</tbody></table></div>`;
+  });
+
+  // Format
+  html = html
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/AED\s?([\d,]+(?:\.\d{0,2})?)/g, '<span class="aed">AED $1</span>')
+    .replace(/Article\s+(\d+)/gi, '<span class="law">Art.$1</span>')
+    .replace(/Art\.\s*(\d+)/gi, '<span class="law">Art.$1</span>')
+    .replace(/\bRED\b/g, '<span class="msg-rag rag-r">RED</span>')
+    .replace(/\bAMBER\b/g, '<span class="msg-rag rag-a">AMBER</span>')
+    .replace(/\bGREEN\b/g, '<span class="msg-rag rag-g">GREEN</span>')
+    .replace(/\bCRITICAL\b/g, '<span class="msg-rag rag-r">CRITICAL</span>')
+    .replace(/^#{1,3} (.+)$/gm, '<div class="ai-heading">$1</div>')
+    .replace(/^• (.+)$/gm, '<div class="ai-bullet">• $1</div>')
+    .replace(/^- (.+)$/gm, '<div class="ai-bullet">• $1</div>')
+    .replace(/^(\d+)\. (.+)$/gm, '<div class="ai-bullet"><strong>$1.</strong> $2</div>')
+    .replace(/\n\n/g, '<br><br>')
+    .replace(/\n/g, '<br>');
+  return html;
+}
+
+function markdownToHtmlTable(md) {
+  // Convert markdown tables to proper HTML
+  return md.replace(/\|(.+)\|\n\|[-| :]+\|\n((?:\|.+\|\n?)+)/g, function(match, header, rows) {
+    const ths = header.split('|').filter(h=>h.trim()).map(h=>`<th>${h.trim()}</th>`).join('');
+    const trs = rows.trim().split('\n').map(row=>{
+      const cells = row.split('|').filter(c=>c.trim()!=='').map(c=>{
+        const t = c.trim();
+        const bold = t.startsWith('**') && t.endsWith('**');
+        const val = bold ? t.slice(2,-2) : t;
+        return `<td${bold?' style="font-weight:700;background:#f0f4ff"':''}>${val}</td>`;
+      }).join('');
+      return `<tr>${cells}</tr>`;
+    }).join('');
+    return `<table><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table>`;
+  });
+}
+
+function downloadContent(rawText, filename) {
+  const date = new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'});
+  const time = new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+
+  // Convert markdown to HTML
+  let body = rawText
+    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+    .replace(/^#{3} (.+)$/gm,'<h3>$1</h3>')
+    .replace(/^#{2} (.+)$/gm,'<h2>$1</h2>')
+    .replace(/^#{1} (.+)$/gm,'<h1 style="color:#2D2A8F">$1</h1>')
+    .replace(/^---$/gm,'<hr>')
+    .replace(/\n/g,'<br>');
+
+  body = markdownToHtmlTable(body);
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Emirates Neon Group — HR COSMOS Report</title>
+<style>
+  @page{size:A4;margin:20mm 15mm}
+  *{box-sizing:border-box}
+  body{font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#111;background:#fff;padding:20px;line-height:1.5}
+  .header{border-bottom:3px solid #2D2A8F;padding-bottom:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:flex-end}
+  .header-left h1{font-size:22px;color:#2D2A8F;margin:0 0 2px}
+  .header-left p{font-size:11px;color:#666;margin:0}
+  .header-right{text-align:right;font-size:10px;color:#666}
+  h2{color:#2D2A8F;font-size:14px;margin:18px 0 8px;border-bottom:1px solid #ddd;padding-bottom:4px}
+  h3{color:#3B3590;font-size:13px;margin:14px 0 6px}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:11px}
+  th{background:#2D2A8F;color:#fff;padding:7px 10px;text-align:left;font-size:11px;font-weight:600}
+  td{padding:6px 10px;border-bottom:1px solid #e5e7eb;vertical-align:top}
+  tr:nth-child(even) td{background:#f8f9fa}
+  tr:last-child td{border-bottom:2px solid #2D2A8F;font-weight:600}
+  strong{color:#1a1a2e}
+  hr{border:none;border-top:1px solid #ddd;margin:12px 0}
+  .footer{margin-top:24px;padding-top:10px;border-top:2px solid #2D2A8F;font-size:10px;color:#888;display:flex;justify-content:space-between}
+  .badge{display:inline-block;background:#EEF2FF;color:#2D2A8F;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600}
+  @media print{body{padding:0}.no-print{display:none}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-left">
+    <h1>Emirates Neon Group</h1>
+    <p>HR COSMOS Intelligence Report &nbsp;·&nbsp; UAE Federal Decree-Law No. 33 of 2021 &nbsp;·&nbsp; Confidential</p>
+  </div>
+  <div class="header-right">
+    <div>${date} &nbsp;${time}</div>
+    <div class="badge">HR COSMOS</div>
+  </div>
+</div>
+${body}
+<div class="footer">
+  <span>Emirates Neon Group &nbsp;·&nbsp; HR COSMOS &nbsp;·&nbsp; Confidential</span>
+  <span>Not for external distribution &nbsp;·&nbsp; Generated ${date}</span>
+</div>
+<div class="no-print" style="margin-top:20px;padding:12px;background:#EEF2FF;border-radius:6px;font-size:11px;color:#2D2A8F">
+  <strong>To save as PDF:</strong> Press Ctrl+P → Change destination to "Save as PDF" → Save
+</div>
+</body>
+</html>`;
+
+  const blob = new Blob([html], {type:'text/html;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'ENG_HRCosmos_' + filename.replace(/[^a-z0-9]/gi,'_').slice(0,30) + '_' + new Date().toISOString().slice(0,10) + '.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 1000);
+}
+
+function addMsg(role, html) {
+  const m = document.getElementById('chatMessages');
+  const d = document.createElement('div');
+  d.className = `msg ${role === 'user' ? 'user' : 'ai'}`;
+
+  let content = html;
+  if (role === 'assistant') {
+    content = formatResponse(html);
+  }
+
+  // Add download button for all substantial AI responses
+  const isSubstantial = role === 'assistant' && html.length > 200;
+  const safeHtml = html.replace(/\\/g,'\\\\').replace(/`/g,'\\`');
+  const downloadBtn = isSubstantial ?
+    `<button class="dl-btn" onclick="downloadReport(\`${safeHtml}\`)">⬇ Download Report</button>` : '';
+
+  d.innerHTML = `
+    <div class="msg-bubble">${content}${downloadBtn}</div>
+    <div class="msg-meta">
+      <div class="msg-time">${now()}</div>
+    </div>`;
+  m.appendChild(d);
+  scrollDown();
+}
+
+let typingTimer = null;
+let typingSeconds = 0;
+
+function showTyping() {
+  const m = document.getElementById('chatMessages');
+  const d = document.createElement('div');
+  d.id = 'typing';
+  d.className = 'msg ai';
+  d.innerHTML = `
+    <div class="msg-bubble" id="typingBubble" style="display:flex;align-items:center;gap:10px;min-width:200px">
+      <div class="typing" style="margin:0"><div class="td"></div><div class="td"></div><div class="td"></div></div>
+      <span id="typingLabel" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)">HR COSMOS thinking…</span>
+    </div>`;
+  m.appendChild(d);
+  scrollDown();
+  // Start a visible second counter so user knows it's working
+  typingSeconds = 0;
+  typingTimer = setInterval(() => {
+    typingSeconds++;
+    const lbl = document.getElementById('typingLabel');
+    if (lbl) {
+      if (typingSeconds < 5)  lbl.textContent = `HR COSMOS thinking… ${typingSeconds}s`;
+      else if (typingSeconds < 10) lbl.textContent = `Processing ${typingSeconds}s — large query…`;
+      else lbl.textContent = `Almost ready… ${typingSeconds}s`;
+    }
+  }, 1000);
+}
+
+function hideTyping() {
+  clearInterval(typingTimer);
+  typingSeconds = 0;
+  const t = document.getElementById('typing');
+  if (t) t.remove();
+}
+
+async function sendMessage() {
+  if (loading) return;
+  const inp = document.getElementById('chatInput');
+  const text = inp.innerText.trim();
+  if (!text) return;
+
+  inp.innerText = '';
+  addMsg('user', text);
+  history.push({ role: 'user', content: text });
+
+  loading = true;
+  document.getElementById('sendBtn').disabled = true;
+  showTyping();
+
+  // 45-second timeout — prevents forever hang
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 45000);
+
+  try {
+    const response = await fetch('https://hr-cosmos.zaki-ahmed.workers.dev', {
+      method: 'POST',
+      signal: controller.signal,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-5',
+        max_tokens: 4000,
+        system: SYSTEM,
+        messages: history
+      })
+    });
+
+    clearTimeout(timeout);
+    const data = await response.json();
+    hideTyping();
+
+    if (data.content && data.content[0]) {
+      const reply = data.content[0].text;
+      history.push({ role: 'assistant', content: reply });
+      addMsg('assistant', reply);
+      speakText(reply);
+    } else if (data.error) {
+      addMsg('assistant', '⚠ API Error: ' + (data.error.message || JSON.stringify(data.error)));
+    } else {
+      addMsg('assistant', '⚠ No response received. Please try again.');
+    }
+  } catch(e) {
+    clearTimeout(timeout);
+    hideTyping();
+    if (e.name === 'AbortError') {
+      addMsg('assistant', '⚠ Request timed out after 45 seconds.<br>The query may be too large. Try asking for a specific department or employee instead of the full list.');
+    } else {
+      addMsg('assistant', '⚠ Connection error: ' + e.message + '<br>Check your internet connection and try again.');
+    }
+  }
+
+  loading = false;
+  document.getElementById('sendBtn').disabled = false;
+  inp.focus();
+}
+
+function askQuick(btn) {
+  const q = btn.textContent.trim();
+  const inp = document.getElementById('chatInput');
+  inp.innerText = q;
+  sendMessage();
+}
+
+function downloadReport(rawText) {
+  const date = new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'});
+  
+  // Convert markdown to HTML
+  function mdToHtml(text) {
+    // Tables
+    text = text.replace(/\|(.+)\|\n\|[-|: ]+\|\n((?:\|.+\|\n?)+)/g, function(m, hdr, rows) {
+      const ths = hdr.split('|').filter(h=>h.trim()).map(h=>`<th>${h.trim()}</th>`).join('');
+      const trs = rows.trim().split('\n').map(row=>{
+        const cells = row.split('|').filter(c=>c.trim()!=='').map(c=>{
+          const t = c.trim();
+          const isBold = t.startsWith('**') && t.endsWith('**');
+          return `<td${isBold?' class="total-row"':''}>${isBold?t.slice(2,-2):t}</td>`;
+        }).join('');
+        return `<tr>${cells}</tr>`;
+      }).join('');
+      return `<table><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table>`;
+    });
+    text = text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+    text = text.replace(/^# (.+)$/gm,'<h2>$1</h2>');
+    text = text.replace(/^## (.+)$/gm,'<h3>$1</h3>');
+    text = text.replace(/^---$/gm,'<hr>');
+    text = text.replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>');
+    return `<p>${text}</p>`;
+  }
+
+  const html = `<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<title>ENG HR COSMOS Report — ${date}</title>
+<style>
+  body{font-family:Arial,sans-serif;font-size:12px;color:#111;padding:30px;max-width:900px;margin:0 auto}
+  .header{border-bottom:3px solid #2D2A8F;padding-bottom:14px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:flex-end}
+  .co-name{font-size:20px;font-weight:700;color:#2D2A8F}
+  .report-meta{font-size:10px;color:#888;text-align:right}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:11px}
+  th{background:#2D2A8F;color:#fff;padding:7px 10px;text-align:left}
+  td{padding:6px 10px;border-bottom:1px solid #e5e7eb}
+  tr:nth-child(even) td{background:#f8f9fa}
+  .total-row{font-weight:700;background:#EEF2FF!important}
+  h2{color:#2D2A8F;margin:16px 0 8px;font-size:15px}
+  h3{color:#3B3590;margin:12px 0 6px;font-size:13px}
+  hr{border:none;border-top:1px solid #ddd;margin:12px 0}
+  strong{color:#1a1a2e}
+  .footer{margin-top:24px;padding-top:10px;border-top:2px solid #2D2A8F;font-size:10px;color:#888;display:flex;justify-content:space-between}
+  .pdf-tip{margin-top:16px;padding:10px 14px;background:#EEF2FF;border-radius:6px;font-size:11px;color:#2D2A8F}
+  @media print{.pdf-tip{display:none}}
+</style></head><body>
+<div class="header">
+  <div><div class="co-name">Emirates Neon Group</div><div style="font-size:11px;color:#666">HR COSMOS Intelligence Report &nbsp;·&nbsp; Confidential</div></div>
+  <div class="report-meta">Generated: ${date}<br>UAE Federal Decree-Law No. 33 of 2021</div>
+</div>
+${mdToHtml(rawText)}
+<div class="footer"><span>Emirates Neon Group — HR COSMOS — Confidential</span><span>Not for external distribution</span></div>
+<div class="pdf-tip"><strong>💡 To save as PDF:</strong> Press Ctrl+P → Destination: "Save as PDF" → Save</div>
+</body></html>`;
+
+  try {
+    const blob = new Blob([html], {type: 'text/html;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'ENG_HRCosmos_' + date.replace(/ /g,'_') + '.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  } catch(e) {
+    // Fallback: open in new tab
+    const w = window.open('','_blank');
+    if(w) { w.document.write(html); w.document.close(); }
+  }
+}
+
+// ═══ VOICE INPUT & OUTPUT ════════════════════════════════
+let recognition     = null;
+let synth           = window.speechSynthesis;
+let autoSpeak       = true;
+let currentUtterance = null;
+let isListening     = false;
+let capturedText    = '';
+let silenceTimer    = null;
+let forceStop       = false;
+let restartAttempts = 0;
+let activeStream    = null;   // keep mic stream alive to prevent network drops
+
+const MIC_ICON  = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>`;
+const STOP_ICON = `<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><rect x="5" y="5" width="14" height="14" rx="3"/></svg>`;
+
+/* ── UI state ── */
+function setMicState(on) {
+  isListening = on;
+  const btn  = document.getElementById('micBtn');
+  const vs   = document.getElementById('voiceStatus');
+  const hint = document.getElementById('inputHint');
+  const vst  = document.getElementById('voiceStatusText');
+  btn.style.cssText = '';
+  if (on) {
+    btn.classList.add('listening');
+    btn.innerHTML = STOP_ICON;
+    btn.title = 'Click to STOP & send';
+    if (vs)   vs.style.display = 'flex';
+    if (vst)  vst.innerHTML = '🔴 Listening… speak your question';
+    if (hint) hint.textContent = 'Click 🔴 to stop and send when done speaking';
+  } else {
+    btn.classList.remove('listening');
+    btn.innerHTML = MIC_ICON;
+    btn.title = 'Click to speak';
+    if (vs)   vs.style.display = 'none';
+    if (vst)  vst.innerHTML = '';
+    if (hint) hint.textContent = '① Press 🎤  ② Speak  ③ Press 🔴 to send  (or wait 2 sec)';
+  }
+}
+
+/* ── Release mic stream ── */
+function releaseStream() {
+  if (activeStream) {
+    activeStream.getTracks().forEach(t => t.stop());
+    activeStream = null;
+  }
+}
+
+/* ── Build recognition instance ── */
+function buildRec() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) return null;
+  const rec = new SR();
+
+  // Edge NETWORK FIX: use continuous=false + manual restart on end
+  // continuous=true causes Edge to drop its Microsoft cloud connection after ~15s
+  rec.continuous     = false;
+  rec.interimResults = true;
+  rec.lang           = 'en-US';
+  rec.maxAlternatives = 1;
+
+  rec.onstart = () => {
+    restartAttempts = 0;
+    if (capturedText === '') setMicState(true);  // only flip UI on first start
+  };
+
+  rec.onresult = (e) => {
+    clearTimeout(silenceTimer);
+    let interim = '';
+    let finals  = '';
+    for (let i = 0; i < e.results.length; i++) {
+      if (e.results[i].isFinal) finals  += e.results[i][0].transcript + ' ';
+      else                       interim += e.results[i][0].transcript;
+    }
+    if (finals.trim()) capturedText += (capturedText ? ' ' : '') + finals.trim();
+    const display = capturedText + (interim ? ' ' + interim : '');
+    document.getElementById('chatInput').innerText = display.trim();
+
+    const vst = document.getElementById('voiceStatusText');
+    if (vst) {
+      if (interim) vst.innerHTML = `🎤 Hearing: "<em>${interim}</em>"`;
+      else if (capturedText) vst.innerHTML = `✅ Got: "<em>${capturedText}</em>" — keep speaking or click 🔴`;
+    }
+
+    // Auto-send after 2.5s of silence
+    if (capturedText) {
+      silenceTimer = setTimeout(() => stopVoice(true), 2500);
+    }
+  };
+
+  rec.onerror = (e) => {
+    clearTimeout(silenceTimer);
+
+    // NETWORK error = Edge/Chrome cloud service hiccup — restart silently
+    if (e.error === 'network') {
+      if (!forceStop && isListening && restartAttempts < 5) {
+        restartAttempts++;
+        setTimeout(() => safeStart(), 300);
+      } else {
+        setMicState(false);
+        releaseStream();
+        addMsg('assistant',
+          '🎤 <strong>Voice service unavailable.</strong><br>' +
+          'This is a browser limitation — Speech Recognition requires Google/Microsoft servers.<br>' +
+          '<strong>Try:</strong> Check your internet connection, then press 🎤 again.<br>' +
+          'If it keeps failing, type your question instead.');
+      }
+      return;
+    }
+
+    // no-speech = silence pause — just restart the segment
+    if (e.error === 'no-speech') {
+      if (!forceStop && isListening) setTimeout(() => safeStart(), 100);
+      return;
+    }
+
+    if (e.error === 'aborted') return;
+
+    setMicState(false);
+    releaseStream();
+    const msgs = {
+      'not-allowed'  : '🎤 Microphone blocked.<br><strong>Fix:</strong> Click the 🔒 padlock → Microphone → Allow → refresh page.',
+      'audio-capture': '🎤 No microphone detected. Please connect one and try again.',
+      'not-supported': '🎤 Voice not supported. Use Chrome or Edge 79+.',
+    };
+    addMsg('assistant', msgs[e.error] || `🎤 Voice error: ${e.error}. Please try again.`);
+  };
+
+  rec.onend = () => {
+    clearTimeout(silenceTimer);
+    if (!forceStop && isListening) {
+      // Segment ended naturally — restart immediately for next segment
+      setTimeout(() => safeStart(), 80);
+    } else {
+      setMicState(false);
+      releaseStream();
+    }
+  };
+
+  return rec;
+}
+
+/* ── Safely start/restart recognition ── */
+function safeStart() {
+  if (forceStop || !isListening) return;
+  try {
+    recognition = buildRec();
+    if (recognition) recognition.start();
+  } catch(err) {
+    console.warn('safeStart error:', err.message);
+    setTimeout(() => safeStart(), 500);
+  }
+}
+
+/* ── Stop and optionally send ── */
+function stopVoice(andSend) {
+  clearTimeout(silenceTimer);
+  forceStop = true;
+  isListening = false;           // set before stop to prevent restart loop
+  if (recognition) {
+    try { recognition.stop(); } catch(_) {}
+    try { recognition.abort(); } catch(_) {}
+  }
+  setMicState(false);
+  releaseStream();
+  if (andSend && capturedText.trim()) {
+    document.getElementById('chatInput').innerText = capturedText.trim();
+    setTimeout(() => sendMessage(), 150);
+  }
+}
+
+/* ── Main toggle ── */
+async function toggleVoice() {
+  if (isListening) {
+    stopVoice(true);
+    return;
+  }
+
+  // Request mic permission explicitly (essential for Edge)
+  try {
+    activeStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    // Keep stream alive — this prevents the network error on Edge
+    // by maintaining the hardware mic connection throughout the session
+  } catch(_) {
+    addMsg('assistant',
+      '🎤 <strong>Microphone access denied.</strong><br>' +
+      '<strong>Edge:</strong> Click 🔒 padlock → Microphone → Allow → refresh.<br>' +
+      '<strong>Chrome:</strong> Click 🔒 → Site settings → Microphone → Allow.');
+    return;
+  }
+
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) {
+    releaseStream();
+    addMsg('assistant', '⚠️ Voice not supported. Use <strong>Chrome</strong> or <strong>Edge 79+</strong> on HTTPS.');
+    return;
+  }
+
+  forceStop    = false;
+  capturedText = '';
+  restartAttempts = 0;
+  isListening  = true;           // set before buildRec so onstart doesn't double-flip
+  recognition  = buildRec();
+  if (!recognition) { releaseStream(); return; }
+
+  try {
+    recognition.start();
+  } catch(e) {
+    console.warn('start error:', e.message);
+    releaseStream();
+    setMicState(false);
+  }
+}
+
+function getBestVoice() {
+  const voices = synth.getVoices();
+  // Priority order: Edge Natural voices → Google English → Microsoft → any en-US
+  return voices.find(v => v.name.includes('Microsoft Ryan') && v.lang === 'en-US') ||
+         voices.find(v => v.name.includes('Microsoft Aria') && v.lang === 'en-US') ||
+         voices.find(v => v.name.includes('Microsoft David') && v.lang === 'en-US') ||
+         voices.find(v => v.name.includes('Microsoft Mark') && v.lang === 'en-US') ||
+         voices.find(v => v.name.includes('Google UK English Male')) ||
+         voices.find(v => v.name.includes('Google US English')) ||
+         voices.find(v => v.lang === 'en-US' && v.localService) ||
+         voices.find(v => v.lang.startsWith('en')) ||
+         null;
+}
+
+function speakText(text) {
+  if (!autoSpeak) return;
+  stopSpeaking();
+
+  // Strip markdown/table formatting for cleaner speech
+  let clean = text
+    .replace(/\|[^\n]+\|/g, '')
+    .replace(/\*\*(.*?)\*\*/g, '$1')
+    .replace(/#{1,3} /g, '')
+    .replace(/---/g, '')
+    .replace(/\n\n/g, '. ')
+    .replace(/\n/g, '. ')
+    .replace(/⚠/g, 'Warning:')
+    .replace(/✓/g, 'Yes')
+    .replace(/→/g, '')
+    .replace(/AED/g, 'A E D')
+    .trim();
+
+  if (clean.length > 600) clean = clean.substring(0, 600) + '. See full response on screen.';
+  if (!clean.trim()) return;
+
+  // Edge fix: voices may not be loaded yet — retry after load
+  const doSpeak = () => {
+    currentUtterance = new SpeechSynthesisUtterance(clean);
+    currentUtterance.rate  = 0.92;
+    currentUtterance.pitch = 1.0;
+    currentUtterance.volume = 1.0;
+    const v = getBestVoice();
+    if (v) currentUtterance.voice = v;
+
+    currentUtterance.onstart = () => {
+      const sb = document.getElementById('stopBtn');
+      if (sb) sb.style.display = 'block';
+    };
+    currentUtterance.onend = () => {
+      const sb = document.getElementById('stopBtn');
+      if (sb) sb.style.display = 'none';
+      currentUtterance = null;
+    };
+    currentUtterance.onerror = (e) => {
+      // Edge sometimes fires 'interrupted' — not a real error
+      if (e.error !== 'interrupted') {
+        const sb = document.getElementById('stopBtn');
+        if (sb) sb.style.display = 'none';
+      }
+      currentUtterance = null;
+    };
+    synth.speak(currentUtterance);
+  };
+
+  if (synth.getVoices().length === 0) {
+    // Voices not loaded yet (common on Edge first load)
+    synth.onvoiceschanged = () => { synth.onvoiceschanged = null; doSpeak(); };
+  } else {
+    doSpeak();
+  }
+}
+
+function stopSpeaking() {
+  if (synth.speaking || synth.pending) synth.cancel();
+  const sb = document.getElementById('stopBtn');
+  if (sb) sb.style.display = 'none';
+  currentUtterance = null;
+}
+
+function toggleAutoSpeak() {
+  autoSpeak = document.getElementById('autoSpeak').checked;
+  if (!autoSpeak) stopSpeaking();
+}
+
+// Pre-load voices on page start (helps Edge initialize faster)
+if (typeof speechSynthesis !== 'undefined') {
+  speechSynthesis.getVoices();
+  if (speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+  }
+}
+
+document.getElementById('chatInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+});
+</script>
+</body>
+</html>
