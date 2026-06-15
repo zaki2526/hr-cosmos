@@ -849,8 +849,36 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);display:flex;flex-direct
 <script>
 const API_KEY = ""; // Handled by Cloudflare Worker
 
-const SYSTEM = `You are HR COSMOS, the AI HR intelligence agent for Emirates Neon Group (ENG), UAE.
+function getLiveSystem() {
+  // Always inject today's real date — never fixed
+  const now = new Date();
+  const todayStr = now.toLocaleDateString('en-GB', {day:'2-digit', month:'long', year:'numeric'});
+  const monthYear = now.toLocaleDateString('en-GB', {month:'long', year:'numeric'});
+
+  // Live gratuity calculator for system prompt
+  function calcLiveGratuity(basic, dojStr) {
+    const doj = new Date(dojStr);
+    const msPerDay = 1000*60*60*24;
+    const yrs = (now - doj) / (msPerDay * 365.25);
+    if (yrs < 1) return 0;
+    const dr = basic / 30;
+    let g = yrs <= 5 ? dr*21*yrs : (dr*21*5)+(dr*30*(yrs-5));
+    return Math.min(Math.round(g), basic*24);
+  }
+
+  function calcLiveService(dojStr) {
+    const doj = new Date(dojStr);
+    const yrs = (now - doj) / (1000*60*60*24*365.25);
+    return yrs.toFixed(2);
+  }
+
+  return `You are HR COSMOS, the AI HR intelligence agent for Emirates Neon Group (ENG), UAE.
 You serve the CEO and HR team with 100% accurate answers from verified company data.
+
+TODAY'S DATE: ${todayStr}
+CURRENT MONTH: ${monthYear}
+ALL DATES, CALCULATIONS, FFS DOCUMENTS MUST USE: ${todayStr}
+NEVER use any other date. NEVER use May 2026 or any past date.
 
 ABSOLUTE RULES:
 1. ONLY use names and figures from the databases below. NEVER invent data.
@@ -858,6 +886,7 @@ ABSOLUTE RULES:
 3. Always produce MARKDOWN TABLES for any list, report, or salary sheet.
 4. For payroll reports include ALL employees in that category — do not stop early.
 5. AED figures first. UAE Law article second. Action last.
+6. ALL FFS/EOSB documents must show Date: ${todayStr} — no exceptions.
 
 ═══ NOTE: All EOSB, Gratuity, Service Years calculated LIVE from DOJ using today's date. Dashboard auto-updates every page load.
 ═══ STAFF DATABASE — 55 employees (Code|Name|Category|Designation|Dept|Nationality|DOJ|Service|Basic|Gross|Gratuity|LeaveBal|PaidAdj|TotalEOSB|Passport|Visa|Labor) ═══
@@ -1053,11 +1082,12 @@ Documents: Passport expires [passport] | Visa expires [visa] | Labor expires [la
 
 *Prepared by: Kaleem Javeed | Checked by: Zaki Ahmed | Reviewed by: Samad Ur Rehman | Approved by: MD/GCEO*
 *UAE Federal Decree-Law No. 33 of 2021 — Confidential*`;
+}
 
 let history = [];
 let loading = false;
 
-function now() {
+function nowTime() {
   return new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
 }
 
@@ -1207,7 +1237,7 @@ function addMsg(role, html) {
   d.innerHTML = `
     <div class="msg-bubble">${content}${downloadBtn}</div>
     <div class="msg-meta">
-      <div class="msg-time">${now()}</div>
+      <div class="msg-time">${nowTime()}</div>
     </div>`;
   m.appendChild(d);
   scrollDown();
@@ -1276,7 +1306,7 @@ async function sendMessage() {
       body: JSON.stringify({
         model: 'claude-sonnet-4-5',
         max_tokens: 4000,
-        system: SYSTEM,
+        system: getLiveSystem(),
         messages: history
       })
     });
