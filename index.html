@@ -570,40 +570,40 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);display:flex;flex-direct
 
     <div class="alert fi" role="alert">
       <div class="alert-icon">⚠</div>
-      <div><strong style="color:#fff">58 documents require immediate PRO action:</strong>&nbsp; 35 labor cards overdue · 21 visa/EID overdue · 2 passports overdue &nbsp;·&nbsp; MOHRE fine exposure: <strong style="color:#fff">AED 29,000+/month</strong></div>
+      <div><span id="doc-alert-banner">Calculating document status...</span></div>
     </div>
 
     <div class="kpi-grid fi">
       <div class="kpi k1">
         <div class="kpi-lbl">Total in scope</div>
-        <div class="kpi-val">112</div>
-        <div class="kpi-sub">50 staff · 62 workers</div>
+        <div class="kpi-val" id="kpi-headcount">—</div>
+        <div class="kpi-sub" id="kpi-headcount-sub">Loading...</div>
       </div>
       <div class="kpi k2">
         <div class="kpi-lbl">Avg service</div>
-        <div class="kpi-val">13.4 yrs</div>
-        <div class="kpi-sub">Longest serving: 38.2 yrs</div>
+        <div class="kpi-val" id="kpi-avgservice">—</div>
+        <div class="kpi-sub" id="live-timestamp">Calculating...</div>
       </div>
       <div class="kpi k3">
-        <div class="kpi-lbl">May 2026 payroll</div>
-        <div class="kpi-val">AED 487K</div>
-        <div class="kpi-sub">Staff 374,650 · Workers 112,263</div>
+        <div class="kpi-lbl">Monthly payroll</div>
+        <div class="kpi-val" id="kpi-payroll">—</div>
+        <div class="kpi-sub" id="kpi-payroll-sub">Loading...</div>
       </div>
       <div class="kpi k4">
         <div class="kpi-lbl">Net EOSB liability</div>
-        <div class="kpi-val">AED 3.24M</div>
-        <div class="kpi-sub">12-month proj: AED 3.43M</div>
+        <div class="kpi-val" id="kpi-eosb">—</div>
+        <div class="kpi-sub" id="kpi-eosb-sub">Loading...</div>
       </div>
     </div>
 
     <div class="two-col fi" style="margin-bottom:12px">
       <div class="card">
         <div class="card-hd"><span class="cdot cd1"></span>Tenure distribution</div>
-        <div class="br"><span class="br-lbl">20+ years</span><div class="br-track"><div class="br-fill" style="width:55%;background:linear-gradient(90deg,#C9A84C,#E8C96A)">31</div></div><span class="br-n">31</span></div>
-        <div class="br"><span class="br-lbl">10–20 years</span><div class="br-track"><div class="br-fill" style="width:50%;background:linear-gradient(90deg,#9C8040,#C9A84C)">28</div></div><span class="br-n">28</span></div>
-        <div class="br"><span class="br-lbl">5–10 years</span><div class="br-track"><div class="br-fill" style="width:54%;background:#6B5A30">30</div></div><span class="br-n">30</span></div>
-        <div class="br"><span class="br-lbl">3–5 years</span><div class="br-track"><div class="br-fill" style="width:13%;background:#3D3420"> 7</div></div><span class="br-n">7</span></div>
-        <div class="br"><span class="br-lbl">1–3 years</span><div class="br-track"><div class="br-fill" style="width:25%;background:#2A2515">14</div></div><span class="br-n">14</span></div>
+        <div class="br"><span class="br-lbl">20+ years</span><div class="br-track"><div class="br-fill" id="tenure-20-pct" style="width:0%;background:linear-gradient(90deg,#C9A84C,#E8C96A)"><span id="tenure-20">—</span></div></div><span class="br-n" id="tenure-20b">—</span></div>
+        <div class="br"><span class="br-lbl">10–20 years</span><div class="br-track"><div class="br-fill" id="tenure-10-pct" style="width:0%;background:linear-gradient(90deg,#9C8040,#C9A84C)"><span id="tenure-10">—</span></div></div><span class="br-n">—</span></div>
+        <div class="br"><span class="br-lbl">5–10 years</span><div class="br-track"><div class="br-fill" id="tenure-5-pct" style="width:0%;background:#6B5A30"><span id="tenure-5">—</span></div></div><span class="br-n">—</span></div>
+        <div class="br"><span class="br-lbl">3–5 years</span><div class="br-track"><div class="br-fill" id="tenure-3-pct" style="width:0%;background:#3D3420"><span id="tenure-3">—</span></div></div><span class="br-n">—</span></div>
+        <div class="br"><span class="br-lbl">1–3 years</span><div class="br-track"><div class="br-fill" id="tenure-1-pct" style="width:0%;background:#2A2515"><span id="tenure-1">—</span></div></div><span class="br-n">—</span></div>
         <div style="font-size:10px;color:var(--muted);margin-top:8px;font-family:'JetBrains Mono',monospace">⚡ 59 employees (53%) have 10+ years — EOSB concentration risk</div>
       </div>
       <div class="card">
@@ -622,21 +622,20 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);display:flex;flex-direct
     <div class="three-col fi" style="margin-bottom:12px">
       <div class="card">
         <div class="card-hd"><span class="cdot cd1"></span>Liability breakdown</div>
-        <div class="dr"><span class="lbl">Gratuity (Art. 51)</span><span class="val gd">AED 2,330,418</span></div>
-        <div class="dr"><span class="lbl">Leave salary (Art. 29)</span><span class="val gd">AED 2,133,743</span></div>
-        <div class="dr"><span class="lbl">Total EOSB gross</span><span class="val">AED 4,464,161</span></div>
-        <div class="dr"><span class="lbl">Less: paid advances</span><span class="val em">(AED 259,100)</span></div>
-        <div class="dr"><span class="lbl">Less: fines/deductions</span><span class="val em">(AED 155,751)</span></div>
-        <div class="dt"><span>Net EOSB balance</span><span class="val">AED 3,244,079</span></div>
+        <div class="dr"><span class="lbl">Gratuity (Art. 51)</span><span class="val gd" id="eosb-gratuity">—</span></div>
+        <div class="dr"><span class="lbl">Leave salary (Art. 29)</span><span class="val gd" id="eosb-leave">—</span></div>
+        <div class="dr"><span class="lbl">Total EOSB gross</span><span class="val" id="eosb-gross">—</span></div>
+        <div class="dr"><span class="lbl">Less: paid advances</span><span class="val em" id="eosb-paidadj">—</span></div>
+        <div class="dt"><span>Net EOSB balance</span><span class="val" id="eosb-net">—</span></div>
       </div>
       <div class="card">
         <div class="card-hd"><span class="cdot cd3"></span>Accruals & projections</div>
-        <div class="dr"><span class="lbl">Monthly accrual</span><span class="val am">AED 15,807</span></div>
-        <div class="dr"><span class="lbl">Annual accrual</span><span class="val am">AED 189,684</span></div>
-        <div class="dr"><span class="lbl">12-month projection</span><span class="val">AED 3,433,763</span></div>
-        <div class="dr"><span class="lbl">24-month projection</span><span class="val">AED 3,623,447</span></div>
-        <div class="dr"><span class="lbl">UAE vs ENG gap</span><span class="val rb">+AED 575,193</span></div>
-        <div class="dr"><span class="lbl">Legal exposure</span><span class="val rb">+16%</span></div>
+        <div class="dr"><span class="lbl">Monthly accrual</span><span class="val am" id="eosb-monthly-accrual">—</span></div>
+        <div class="dr"><span class="lbl">Annual accrual</span><span class="val am" id="eosb-annual-accrual">—</span></div>
+        <div class="dr"><span class="lbl">12-month projection</span><span class="val" id="eosb-proj12">—</span></div>
+        <div class="dr"><span class="lbl">24-month projection</span><span class="val" id="eosb-proj24">—</span></div>
+        <div class="dr"><span class="lbl">ENG internal tracking</span><span class="val rb">Live from DOJ</span></div>
+        <div class="dr"><span class="lbl">Auto-updates</span><span class="val gd">✓ Every page load</span></div>
       </div>
       <div class="card">
         <div class="card-hd"><span class="cdot cd4"></span>Top 10 EOSB holders</div>
@@ -666,25 +665,25 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);display:flex;flex-direct
         <div>
           <div style="font-size:9px;font-weight:600;font-family:'JetBrains Mono',monospace;margin-bottom:7px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em">Passport</div>
           <div class="exp-grid">
-            <div class="exp-box cr"><div class="en">2</div><div class="el">Overdue</div></div>
-            <div class="exp-box wn"><div class="en">2</div><div class="el">≤90 days</div></div>
+            <div class="exp-box cr"><div class="en" id="doc-pass-expired">—</div><div class="el">Overdue</div></div>
+            <div class="exp-box wn"><div class="en"><span id="doc-pass-warn">—</span></div><div class="el">≤90 days</div></div>
             <div class="exp-box ok"><div class="en">9</div><div class="el">91–180d</div></div>
           </div>
         </div>
         <div>
           <div style="font-size:9px;font-weight:600;font-family:'JetBrains Mono',monospace;margin-bottom:7px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em">Visa / EID</div>
           <div class="exp-grid">
-            <div class="exp-box cr"><div class="en">21</div><div class="el">Overdue</div></div>
-            <div class="exp-box wn"><div class="en">9</div><div class="el">≤90 days</div></div>
+            <div class="exp-box cr"><div class="en" id="doc-visa-expired">—</div><div class="el">Overdue</div></div>
+            <div class="exp-box wn"><div class="en" id="doc-visa-warn">—</div><div class="el">≤90 days</div></div>
             <div class="exp-box ok"><div class="en">3</div><div class="el">91–180d</div></div>
           </div>
         </div>
         <div>
           <div style="font-size:9px;font-weight:600;font-family:'JetBrains Mono',monospace;margin-bottom:7px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em">Labor Card</div>
           <div class="exp-grid">
-            <div class="exp-box cr"><div class="en">35</div><div class="el">Overdue</div></div>
-            <div class="exp-box wn"><div class="en">8</div><div class="el">≤90 days</div></div>
-            <div class="exp-box ok"><div class="en">11</div><div class="el">91–180d</div></div>
+            <div class="exp-box cr"><div class="en" id="doc-labor-expired">—</div><div class="el">Overdue</div></div>
+            <div class="exp-box wn"><div class="en" id="doc-labor-warn">—</div><div class="el">≤90 days</div></div>
+            <div class="exp-box ok"><div class="en">—</div><div class="el">91–180d</div></div>
           </div>
         </div>
       </div>
@@ -860,6 +859,7 @@ ABSOLUTE RULES:
 4. For payroll reports include ALL employees in that category — do not stop early.
 5. AED figures first. UAE Law article second. Action last.
 
+═══ NOTE: All EOSB, Gratuity, Service Years calculated LIVE from DOJ using today's date. Dashboard auto-updates every page load.
 ═══ STAFF DATABASE — 55 employees (Code|Name|Category|Designation|Dept|Nationality|DOJ|Service|Basic|Gross|Gratuity|LeaveBal|PaidAdj|TotalEOSB|Passport|Visa|Labor) ═══
 2003|Shuja Charoo|Staff|Sales Director|Sales  Signage / Pro|Indian|02-Jun-2002|24.01yrs|Basic:12500|Gross:35000|Gratuity:281318|LeaveBal:60419|PaidAdj:38540|TotalEOSB:341737|Passport:22-Sep-2029|Visa:26-Mar-2027|Labor:25-May-2027
 2157|Fernando M Ramirez|Staff|Project Manager|Signage / Project|Filipino|05-Aug-2018|7.82yrs|Basic:8000|Gross:20000|Gratuity:50553|LeaveBal:14589|PaidAdj:79131|TotalEOSB:-19858|Passport:11-Oct-2030|Visa:03-Feb-2028|Labor:10-Jul-2026
@@ -1699,6 +1699,253 @@ if (typeof speechSynthesis !== 'undefined') {
 document.getElementById('chatInput').addEventListener('keydown', e => {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
 });
+
+
+// ═══════════════════════════════════════════════════════
+// HR COSMOS LIVE CALCULATION ENGINE — v17
+// Recalculates automatically every page load
+// ═══════════════════════════════════════════════════════
+
+const ENG_EMPLOYEES = [
+  ["2003","Shuja Charoo","Staff","Sales Signage/Pro","Indian","2002-06-02",12500,35000,38540,"2029-09-22","2027-03-26","2027-05-25",60419],
+  ["2157","Fernando M Ramirez","Staff","Signage/Project","Filipino","2018-08-05",8000,20000,79131,"2030-10-11","2028-02-03","2026-07-10",14589],
+  ["3778","Rajesh Dhummy Chandregowda","Staff","Sales Signage","Indian","2024-08-07",6000,18000,0,"2026-07-11","","",0],
+  ["2805","Mahmood Al Jabi","Staff","Sales Signage","Lebanese","2015-10-01",10000,17500,37500,"2033-05-30","2027-11-01","2027-10-23",78575],
+  ["979","Memon Rizwan Ismail","Staff","Finance","Indian","1998-04-23",10000,17000,26485,"2032-09-08","2027-10-23","2027-05-09",13989],
+  ["3641","Samad Ur Rehman","Staff","Finance","Pakistani","2019-10-27",7000,15000,51514,"2034-05-06","2027-10-30","2027-11-01",47363],
+  ["K001","Yasser Mohamed","Staff","KSA","Egyptian","2023-06-01",15000,15000,0,"2026-08-16","2026-06-20","2026-06-20",0],
+  ["3746","Yasmeen Rasem Mohammad Saed","Staff","RM Office","Jordanian","2023-03-21",5000,12000,0,"2026-03-17","2027-02-16","2027-02-11",0],
+  ["3610","Gener Ignacio Sanchez","Staff","Signage Project","Filipino","2019-02-18",4000,11000,29098,"2028-04-16","2027-10-10","2027-09-29",38026],
+  ["3803","Krishna Moorthy","Staff","CAD Estimation","Indian","2025-05-07",3000,9250,0,"2028-04-02","2027-05-15","2027-05-04",0],
+  ["896","Kaleem Javeed","Staff","HR Admin","Indian","2000-09-07",6000,9000,11702,"2034-12-03","2026-05-29","2026-08-27",44765],
+  ["RY01a","Vinoth Kajendran","Staff","RM Yacht","Indian","2013-03-17",1750,8000,17054,"2034-05-12","2027-10-21","2027-10-17",4447],
+  ["3571","Saeed Hassan Jasim","Staff","HR Admin","UAE","2018-05-20",3000,8000,9094,"2028-03-28","2026-12-27","2026-08-20",23125],
+  ["3756","Salim Hussain Aldhaheri","Staff","HR Admin","UAE","2023-06-21",3000,8000,1360,"2027-11-16","2028-12-27","2027-06-20",22158],
+  ["3806","Anees Ahmed","Staff","Purchase","Indian","2025-05-22",2500,8000,0,"2027-07-05","2027-05-23","",0],
+  ["1014","Rahman Ali Usman Ali","Staff","HR Admin","Indian","2002-05-15",3000,7500,25350,"2034-06-23","2027-03-18","2027-05-03",57280],
+  ["2008","Augustine Inbaraj David","Staff","Signage Prod","Indian","2002-06-11",4000,7250,11408,"2026-12-06","2027-08-05","2027-05-30",69568],
+  ["3254","Haby Thomson","Staff","Signage Prod","Indian","2013-12-16",2500,6750,26965,"2027-07-29","2027-03-02","2025-12-09",47124],
+  ["1018","Alimullah Baig Safiullah","Staff","ADH Office","Indian","2014-04-09",2500,6750,15658,"2031-09-29","2026-10-26","2026-07-29",51098],
+  ["3456","Deepu Omanakuttan","Staff","CAD Estimation","Indian","2023-10-16",3000,6750,1755,"2032-12-05","2026-03-21","2026-03-07",12539],
+  ["145","Mathramkott Velayudhan Subhas","Staff","Sites Dev","Indian","1988-03-27",3500,6550,28424,"2026-05-27","2027-06-13","2026-05-28",46211],
+  ["110","Syed Farhat Raza Zaidi","Staff","Signage Prod","Pakistani","1995-07-22",2500,6000,13870,"2031-12-06","2027-03-26","2027-07-31",22719],
+  ["3314","Zaki Ahmed Siddiquie","Staff","Finance","Pakistani","2014-04-19",2000,6000,20800,"2029-02-11","2026-05-27","2026-05-28",22044],
+  ["1260","Muhammad Zubair","Staff","Signage Prod","Pakistani","2004-05-24",1750,5500,22819,"2035-02-20","2027-05-13","2027-05-10",13144],
+  ["3404","Saleem Shahezada","Staff","Signage Prod","Indian","2023-07-27",2500,5000,1771,"2033-04-11","2026-04-19","2026-03-11",8752],
+  ["22","Kazi Zakir Hussain","Staff","Print Prod","Bangladeshi","1998-02-12",2000,4750,10387,"2028-11-28","2027-10-11","2027-02-10",18005],
+  ["3659","Irfan Qaiser Bhatti","Staff","Finance","Pakistani","2020-05-11",2000,4750,8726,"2031-04-27","2027-09-15","2027-09-14",18804],
+  ["3812","Ashiq Ahamed","Staff","LED Engineer","Indian","2025-07-09",2500,4550,0,"2030-02-25","2027-10-12","2027-07-10",0],
+  ["3808","Mahera Khurram","Staff","RM","Pakistani","2024-09-26",2000,4500,0,"2032-08-10","2027-09-01","",0],
+  ["63","Sayed Mohammed Hashem","Staff","Signage Prod","Bangladeshi","1997-04-03",1300,4250,5631,"2033-02-09","2027-03-22","2026-05-28",6313],
+  ["1224","Asif Ahsan","Staff","Print Install","Pakistani","2004-02-25",1250,4250,13253,"2035-07-30","2027-10-02","2027-02-15",25691],
+  ["1199","Dil Bahadur Khadka","Staff","Purchase Stores","Nepali","2003-12-06",1000,4000,11904,"2033-03-21","2026-05-07","2026-11-24",30386],
+  ["3810","Syed Majid Ali","Staff","CAD Estimation","Indian","2025-10-21",1500,4000,0,"","","",0],
+  ["3728","Shobhit Bisht","Staff","Graphic Design","Indian","2022-11-07",1750,3750,2826,"2032-09-28","2025-11-30","2025-10-22",6634],
+  ["3751","Sumaira Ameer","Staff","MD Office Dubai","Pakistani","2023-06-05",1750,3750,0,"2033-03-22","2026-03-11","2026-02-05",8795],
+  ["3752","Aqsa Hameed","Staff","MD Office Dubai","Pakistani","2023-06-05",1750,3750,0,"2027-10-20","2027-08-05","2027-07-10",11188],
+  ["2482","Aasim Raza","Staff","Graphic Design","Indian","2023-08-02",1100,3750,3733,"2031-07-22","2026-04-03","2026-03-18",4276],
+  ["2455","Mohammad Ashique Khan","Staff","Signage Prod","Indian","2005-03-23",1250,3500,8055,"2034-05-02","2027-07-29","2027-03-12",12687],
+  ["3003","Muhammad Ashraf S","Staff","Signage Prod","Pakistani","2008-01-13",1250,3250,12986,"2027-06-06","2025-12-06","2027-01-03",-297],
+  ["3460","Sabu Vattachirayil Appi","Staff","Admin Outdoor","Indian","2016-10-26",1200,3250,4225,"2032-08-01","2026-12-04","2026-10-20",4928],
+  ["1016","Mansoor Umer Shaikh","Staff","HR Admin","Indian","2000-01-10",1000,3000,6447,"2026-09-12","2027-04-28","2026-12-30",1234],
+  ["2785","Faruk Ahmed","Staff","Print Install","Bangladeshi","2006-08-15",1050,3000,14880,"2026-11-15","2027-07-27","2026-08-04",20980],
+  ["3800","Randheer Radhakrishnan","Staff","IT","Indian","2025-03-24",1500,3000,0,"2034-12-17","2027-03-18","2027-03-16",0],
+  ["3454","Umar Javed","Staff","Print Prod","Pakistani","2016-10-17",1000,2750,1161,"2033-12-27","2027-02-24","2026-10-14",6886],
+  ["3744","Hussain Nizami Bhangad","Staff","Admin Outdoor","Indian","2023-03-09",1250,2750,0,"2029-03-09","2026-03-20","2026-03-07",4463],
+  ["3652","Riyaz Ali","Staff","MD Residence","Indian","2020-01-15",1000,2500,0,"2032-12-06","2026-03-23","2026-01-12",4774],
+  ["3365","Tanveer Ahmed","Staff","MD Residence","Pakistani","2017-12-23",1200,2450,2900,"2033-02-08","2027-03-29","2025-12-27",14929],
+  ["MR11","Muhammad Khalil","Staff","MD Office Dubai","Pakistani","2024-05-05",1000,2300,0,"2028-05-01","2026-05-30","2026-05-19",4751],
+  ["RY04","Ajithkumar Annamalai","Staff","RM Yacht","Indian","2022-11-24",1000,2000,4000,"2027-08-02","2027-10-17","2027-10-14",3025],
+  ["RY05","Sasikumar Kolanjiyappan","Staff","RM Yacht","Indian","2024-02-13",1000,2000,0,"2033-11-16","2026-04-26","2026-03-01",4005],
+  ["MR02","Ashique Shamshuddin Muskhan","Staff","MD Residence","Indian","2005-02-28",700,1800,0,"2028-02-09","2027-08-20","2027-03-12",8093],
+  ["MR03","Kamal Yeasin Sardar","Staff","MD Residence","Bangladeshi","2008-05-28",900,1800,5000,"2033-06-07","2025-09-12","2025-11-03",4291],
+  ["3723","Mohammed Zameer Hussain","Staff","Purchase Stores","Indian","2022-09-26",1000,1650,0,"2035-11-19","2026-05-17","2026-03-07",3491],
+  ["AR02","Imtiaz Khan","Staff","Aman Residence","Pakistani","2014-04-27",800,1600,0,"2027-07-17","2026-06-09","2026-02-23",3551],
+  ["57","Shamim Abdul Rashid","Worker","Projects","Bangladeshi","1996-09-29",1600,2950,15270,"2026-11-07","2027-05-04","2027-10-07",10258],
+  ["2531","Nazir Ali","Worker","Drivers Prod","Pakistani","2005-08-22",1500,2750,0,"2034-06-24","2025-10-10","2028-01-18",9472],
+  ["2273","Anamul Haque","Worker","Install Neon","Bangladeshi","2004-06-02",1400,2550,1400,"2028-03-21","2027-03-29","2025-10-28",14540],
+  ["2876","Anisur Monirul Hoque","Worker","Router","Bangladeshi","2008-06-12",1000,2550,1000,"2026-11-06","2027-05-03","2027-06-02",22656],
+  ["46","Mamrez Ali","Worker","Capex","Pakistani","1998-05-30",1250,2500,6775,"2031-11-22","2027-03-29","2027-05-25",6990],
+  ["1021","Ram Prashad Nandy","Worker","Plastic","Bangladeshi","2003-10-28",1300,2500,5550,"2026-06-21","2027-03-29","2026-10-21",19513],
+  ["3282","Mohammad Arman","Worker","Maint Outdoor","Indian","2014-03-05",1000,2450,3300,"2031-09-03","2026-07-06","2026-05-28",15415],
+  ["3280","Adil Khan","Worker","Maint InHouse","Indian","2014-03-05",1000,2450,3100,"2034-07-11","2026-07-06","2026-05-28",10117],
+  ["3497","Visu Natarajan","Worker","Maint InHouse","Indian","2017-02-04",1200,2450,6003,"2030-03-17","2027-05-14","2027-01-28",11550],
+  ["3436","Hassan Ali","Worker","Install Outdoor","Pakistani","2020-02-15",1100,2450,3851,"2035-11-18","2026-03-29","2026-02-10",1868],
+  ["1017","Mohamed Husain","Worker","Metal","Indian","2001-01-16",1400,2400,1700,"2035-02-28","2027-08-12","2027-01-04",16134],
+  ["2316","Salahuddin","Worker","Maint Service","Bangladeshi","2008-07-12",1000,2350,6500,"2027-06-25","2027-03-29","2027-07-03",15546],
+  ["2930","Ansari Mohammad Alam","Worker","Install Neon","Indian","2007-02-05",1200,2300,7190,"2035-03-19","2027-03-29","2027-04-22",17359],
+  ["173","Nizar Ali","Worker","Plastic","Pakistani","1992-07-14",1300,2250,5050,"2027-11-28","2029-03-29","2027-07-25",17947],
+  ["2993","Hassan Ali Kasem Ali","Worker","Plastic","Bangladeshi","2007-12-08",1400,2250,4000,"2026-11-07","2027-03-07","2026-11-27",14916],
+  ["3325","Mohammad Taz Ansari","Worker","Install Outdoor","Indian","2014-06-24",1000,2250,6950,"2035-08-12","2027-03-30","2026-06-17",15342],
+  ["3372","Muhammad Naveed","Worker","Building Wrap","Pakistani","2015-04-04",1000,2250,11593,"2028-01-16","2027-11-15","2027-03-28",3757],
+  ["175","Haji Muhammed","Worker","Drivers Prod","Pakistani","1999-04-08",1400,2200,1270,"2032-10-24","2027-04-11","2027-03-26",8652],
+  ["1159","Byju Jayan Leela","Worker","Steel Fab","Indian","2003-10-23",1000,2200,3703,"2031-05-02","2027-12-06","2026-10-12",21112],
+  ["3286","Jahid Ali","Worker","Install Neon","Indian","2014-03-16",1000,2200,1850,"2033-03-17","2026-06-26","2026-05-28",14418],
+  ["155","Golam Mohammad","Worker","Drivers Prod","Bangladeshi","1991-09-25",1250,2150,3285,"2026-12-14","2027-07-28","2026-10-09",18756],
+  ["1192","Mohammad Firoz Miah","Worker","Steel Fab","Bangladeshi","2003-11-22",1000,2150,0,"2035-10-02","2027-12-12","2028-01-06",21328],
+  ["2375","Muhammad Ashraf W","Worker","Drivers Prod","Pakistani","2005-12-28",1250,2150,0,"2026-09-16","2027-03-07","2026-12-17",6539],
+  ["2318","Ala Uddin","Worker","Metal","Bangladeshi","2007-01-09",1050,2150,2400,"2026-11-06","2027-03-07","2026-11-21",20212],
+  ["887","Gauhar Ali","Worker","Plastic","Indian","2000-08-24",1200,2100,5633,"2029-03-18","2027-07-26","2026-08-12",14889],
+  ["1058","Yam Bahadur Bhujel","Worker","Steel Fab","Nepali","2002-05-23",800,2100,3450,"2034-12-07","2027-11-19","2027-05-13",14915],
+  ["1185","Min Bahadur Pokharel","Worker","Capex","Nepali","2003-11-06",900,2100,2000,"2033-03-27","2026-04-29","2026-10-26",21922],
+  ["2772","Jashim Goni Miah","Worker","Tensioning","Bangladeshi","2006-07-31",1100,2050,4951,"2027-10-03","2027-11-15","2026-08-04",17256],
+  ["3284","Akhlaqur Rahman","Worker","Maint Service","Indian","2014-03-08",1000,2050,0,"2030-09-07","2026-06-30","2026-05-28",12075],
+  ["3306","Logeswaran Chellathurai","Worker","Capex","Indian","2014-04-09",1000,2050,0,"2033-09-01","2026-07-05","2026-05-28",20642],
+  ["3348","Md Jahangir","Worker","Install Neon","Indian","2014-12-17",1000,2050,2437,"2033-12-28","2027-03-31","2026-12-10",14796],
+  ["3569","Wajid Ali","Worker","Install Outdoor","Pakistani","2018-05-10",1000,2050,1800,"2030-10-19","2026-07-01","2026-05-28",14658],
+  ["3645","Muhammad Nazir Khan","Worker","Drivers Prod","Pakistani","2019-02-02",1200,2050,6950,"2031-08-28","2026-03-29","2025-11-04",7943],
+  ["3674","Shalauddin","Worker","Electrical","Indian","2020-11-24",1000,2050,5900,"2029-05-14","2027-07-07","2027-03-25",5220],
+  ["3681","Mohammad Sonu","Worker","Capex","Indian","2020-12-10",1000,2050,0,"2029-05-30","2027-06-07","2027-03-25",6505],
+  ["178","Gul Nazir","Worker","Ink Jet","Pakistani","1992-08-28",1200,2000,0,"2026-09-16","2027-05-03","2027-08-10",5690],
+  ["3324","Muhammad Imran","Worker","Drivers Prod","Pakistani","2014-06-05",1200,2000,9000,"2028-07-09","2027-05-03","2026-05-28",10724],
+  ["3512","Ranjit Kumar Singh","Worker","Capex","Indian","2017-04-02",1200,2000,5870,"2029-04-25","2027-03-07","2027-03-27",12307],
+  ["3518","Manshi Kumar Sharma","Worker","Capex","Indian","2017-04-23",1200,2000,5972,"2026-12-20","2027-03-07","2027-04-17",12090],
+  ["1385","Dainel Kurisummoottil Koshy","Worker","Capex","Indian","2006-06-24",1000,1950,0,"2032-10-06","2027-12-05","2028-06-12",15870],
+  ["2975","Babu Day Bimal Dey","Worker","Painting","Bangladeshi","2007-10-27",1000,1950,5832,"2030-04-21","2027-05-04","2027-10-15",10853],
+  ["3301","Murinhayakkal Babu Rajan","Worker","Vinyl Pasting","Indian","2014-04-05",1000,1950,4143,"2029-10-08","2026-07-05","2026-05-28",15656],
+  ["3692","Mohammad Asif Khan W","Worker","Vinyl Pasting","Indian","2021-02-06",1000,1950,3750,"2028-07-31","2026-10-16","2026-02-13",4498],
+  ["2441","Mohammad Perwez Alam","Worker","Vinyl Pasting","Indian","2005-03-23",1100,1900,2200,"2027-07-12","2027-02-06","2027-03-12",6788],
+  ["3020","Muhammad Nisar","Worker","Electrical","Pakistani","2008-02-20",950,1900,6767,"2027-12-07","2027-03-07","2027-02-09",6930],
+  ["3657","Imran Ali","Worker","Install Outdoor","Pakistani","2020-01-25",1000,1900,6700,"2029-01-31","2026-03-29","2026-01-20",5301],
+  ["2898","Mohammed Syedul Huque","Worker","Maint Service","Bangladeshi","2008-05-25",800,1850,3300,"2026-11-07","2027-03-29","2027-05-16",12004],
+  ["3269","Dayamon Podiyan","Worker","Steel Fab","Indian","2014-02-18",1200,1850,5150,"2028-01-23","2027-03-07","2026-02-11",13712],
+  ["1496","Ayyappan Swamy","Worker","Steel Fab","Indian","2016-03-03",1200,1850,0,"2027-07-20","2027-05-03","2026-05-28",18791],
+  ["1498","Selvarajan Antony","Worker","Steel Fab","Indian","2016-09-24",1200,1850,5000,"2028-02-05","2027-02-24","2026-09-18",12752],
+  ["3482","Muhammad Aliulla","Worker","Tensioning","Indian","2016-11-28",1000,1850,5366,"2035-04-25","2027-03-07","2026-11-22",12163],
+  ["3553","Faisal Shahani","Worker","Vehicle Graphic","Pakistani","2018-02-06",1000,1850,3000,"2029-09-24","2027-05-03","2026-02-01",7038],
+  ["2962","Babasaheb Ayub Banekar","Worker","Ink Jet","Indian","2018-11-25",1000,1850,2650,"2032-11-13","2027-12-05","2027-02-05",11205],
+  ["3656","Ahsan Raza","Worker","Install Outdoor","Pakistani","2020-01-25",1000,1850,7390,"2029-01-31","2026-03-29","2026-01-26",4295],
+  ["3711","Abdul Vahab","Worker","Metal","Indian","2022-03-08",1000,1850,3835,"2030-02-13","2026-12-04","2026-10-19",2761],
+  ["3684","Sugin Rajaretnam","Worker","Maint InHouse","Indian","2020-12-30",1200,1750,7285,"2034-07-09","2027-07-13","2027-03-25",2064],
+  ["0077","Jakir Hossain","Worker","Install Neon","Bangladeshi","2021-01-04",1000,1750,3999,"2034-09-04","2027-07-20","2027-03-27",5301],
+  ["3672","Meraj Khan","Worker","Painting","Indian","2023-12-01",1000,1750,0,"2030-02-03","2027-03-05","2027-02-28",0],
+  ["1371","Nagaraj Kallyan Shetty","Worker","Painting","Indian","2018-07-25",1200,1650,3000,"2028-01-26","2025-05-08","2025-02-06",9809],
+  ["3599","Syed Naveed Ahmed","Worker","HR Admin","Pakistani","2018-11-27",900,1450,3430,"2034-11-27","2026-03-29","2027-09-29",4276]
+];
+
+(function() {
+  const today = new Date();
+  today.setHours(0,0,0,0);
+
+  function pDate(s) {
+    if (!s || !s.trim()) return null;
+    const p = s.split('-');
+    if (p.length !== 3) return null;
+    return new Date(+p[0], +p[1]-1, +p[2]);
+  }
+
+  function calcGrat(basic, doj) {
+    const d = pDate(doj);
+    if (!d) return 0;
+    const yrs = (today - d) / (1000*60*60*24*365.25);
+    if (yrs < 1) return 0;
+    const dr = basic / 30;
+    let g = yrs <= 5 ? dr*21*yrs : (dr*21*5) + (dr*30*(yrs-5));
+    return Math.min(Math.round(g), basic*24);
+  }
+
+  function calcAccrual(basic, doj) {
+    const d = pDate(doj);
+    if (!d) return 0;
+    const yrs = (today - d) / (1000*60*60*24*365.25);
+    if (yrs < 1) return 0;
+    const dpy = yrs > 5 ? 30 : 21;
+    return Math.round((basic/30) * dpy / 12);
+  }
+
+  function docSt(s) {
+    const d = pDate(s);
+    if (!d) return 'x';
+    const diff = (d - today) / (1000*60*60*24);
+    if (diff < 0) return 'exp';
+    if (diff <= 90) return 'w90';
+    return 'ok';
+  }
+
+  function fmt(n) { return Math.round(n).toLocaleString(); }
+  function fmtM(n) {
+    if (n >= 1000000) return 'AED ' + (n/1000000).toFixed(2) + 'M';
+    return 'AED ' + (n/1000).toFixed(0) + 'K';
+  }
+
+  let tGrat=0, tLeave=0, tPaid=0, tGross=0, tAccrual=0;
+  let sc=0, wc=0, total=0;
+  let tSvc=0;
+  let ep=0,ev=0,el=0, wp=0,wv=0,wl=0;
+  let tb={t20:0,t10:0,t5:0,t3:0,t1:0,t0:0};
+
+  ENG_EMPLOYEES.forEach(e => {
+    const [code,name,cat,dept,nat,doj,basic,gross,paid,pp,vp,lp,leaveAED] = e;
+    total++;
+    if(cat==='Staff') sc++; else wc++;
+    tGross += gross;
+    const g = calcGrat(basic, doj);
+    tGrat += g;
+    tLeave += Math.max(0, leaveAED);
+    tPaid += paid;
+    tAccrual += calcAccrual(basic, doj);
+
+    const d = pDate(doj);
+    const yrs = d ? (today-d)/(1000*60*60*24*365.25) : 0;
+    tSvc += yrs;
+    if(yrs>=20) tb.t20++;
+    else if(yrs>=10) tb.t10++;
+    else if(yrs>=5) tb.t5++;
+    else if(yrs>=3) tb.t3++;
+    else if(yrs>=1) tb.t1++;
+    else tb.t0++;
+
+    const ps=docSt(pp), vs=docSt(vp), ls=docSt(lp);
+    if(ps==='exp') ep++; else if(ps==='w90') wp++;
+    if(vs==='exp') ev++; else if(vs==='w90') wv++;
+    if(ls==='exp') el++; else if(ls==='w90') wl++;
+  });
+
+  const netEOSB = tGrat + tLeave - tPaid;
+  const proj12 = netEOSB + tAccrual*12;
+  const avgSvc = (tSvc/total).toFixed(1);
+  const totExp = ep+ev+el;
+  const mohre = totExp * 500;
+
+  function set(id, val) { const e=document.getElementById(id); if(e) e.textContent=val; }
+  function setW(id, pct) { const e=document.getElementById(id); if(e) e.style.width=pct+'%'; }
+
+  set('kpi-headcount', total);
+  set('kpi-headcount-sub', sc+' staff · '+wc+' workers');
+  set('kpi-avgservice', avgSvc+' yrs');
+  set('kpi-payroll', fmtM(tGross));
+  set('kpi-payroll-sub', 'Monthly gross payroll');
+  set('kpi-eosb', fmtM(netEOSB));
+  set('kpi-eosb-sub', '12-mo proj: '+fmtM(proj12));
+  set('eosb-gratuity', 'AED '+fmt(tGrat));
+  set('eosb-leave', 'AED '+fmt(tLeave));
+  set('eosb-gross', 'AED '+fmt(tGrat+tLeave));
+  set('eosb-paidadj', '(AED '+fmt(tPaid)+')');
+  set('eosb-net', 'AED '+fmt(netEOSB));
+  set('eosb-monthly-accrual', 'AED '+fmt(tAccrual));
+  set('eosb-annual-accrual', 'AED '+fmt(tAccrual*12));
+  set('eosb-proj12', 'AED '+fmt(proj12));
+  set('eosb-proj24', 'AED '+fmt(netEOSB+tAccrual*24));
+  set('doc-pass-expired', ep);
+  set('doc-pass-warn', wp);
+  set('doc-visa-expired', ev);
+  set('doc-visa-warn', wv);
+  set('doc-labor-expired', el);
+  set('doc-labor-warn', wl);
+
+  set('tenure-20', tb.t20); setW('tenure-20-pct', Math.round(tb.t20/total*100));
+  set('tenure-10', tb.t10); setW('tenure-10-pct', Math.round(tb.t10/total*100));
+  set('tenure-5',  tb.t5);  setW('tenure-5-pct',  Math.round(tb.t5/total*100));
+  set('tenure-3',  tb.t3);  setW('tenure-3-pct',  Math.round(tb.t3/total*100));
+  set('tenure-1',  tb.t1);  setW('tenure-1-pct',  Math.round(tb.t1/total*100));
+
+  const banner = document.getElementById('doc-alert-banner');
+  if(banner) banner.innerHTML = '<strong style="color:#fff">'+(totExp+(wp+wv+wl))+' documents require attention:</strong>&nbsp; '+
+    el+' labor cards overdue · '+ev+' visa/EID overdue · '+ep+' passports overdue'+
+    ' &nbsp;·&nbsp; MOHRE fine exposure: <strong style="color:#fff">AED '+fmt(mohre)+'+/month</strong>';
+
+  const ts = today.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+  set('live-timestamp', 'Live · calculated '+ts);
+})();
+
 </script>
-</body>
-</html>
