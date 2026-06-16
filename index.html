@@ -1386,15 +1386,18 @@ function addMsg(role, html) {
 
   // Add download button for all substantial AI responses
   const isSubstantial = role === 'assistant' && html.length > 200;
-  const safeHtml = html.replace(/\\/g,'\\\\').replace(/`/g,'\\`');
-  const downloadBtn = isSubstantial ?
-    `<button class="dl-btn" onclick="downloadReport(\`${safeHtml}\`)">⬇ Download Report</button>` : '';
 
   d.innerHTML = `
-    <div class="msg-bubble">${content}${downloadBtn}</div>
+    <div class="msg-bubble">${content}${isSubstantial ? '<button class="dl-btn" onclick="downloadFromMsg(this)">⬇ Download Report</button>' : ''}</div>
     <div class="msg-meta">
       <div class="msg-time">${nowTime()}</div>
     </div>`;
+
+  // Store raw text safely on the element — no escaping issues
+  if (isSubstantial) {
+    d.querySelector('.dl-btn')._rawText = html;
+  }
+
   m.appendChild(d);
   scrollDown();
 }
@@ -1501,6 +1504,11 @@ function askQuick(btn) {
   const inp = document.getElementById('chatInput');
   inp.innerText = q;
   sendMessage();
+}
+
+function downloadFromMsg(btn) {
+  const rawText = btn._rawText || btn.closest('.msg').querySelector('.msg-bubble').innerText;
+  downloadReport(rawText);
 }
 
 function downloadReport(rawText) {
