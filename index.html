@@ -546,14 +546,14 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);display:flex;flex-direct
     <div class="brand-name">HR <em>COSMOS</em></div>
   </div>
   <div class="topbar-center">
-    <div class="nav-tab active">Dashboard</div>
+    <div class="nav-tab active" onclick="switchTab('dashboard',this)">Dashboard</div>
     <div class="nav-tab" style="color:var(--muted)">·</div>
-    <div class="nav-tab">Analytics</div>
+    <div class="nav-tab" onclick="switchTab('analytics',this)">Analytics</div>
     <div class="nav-tab" style="color:var(--muted)">·</div>
-    <div class="nav-tab">Compliance</div>
+    <div class="nav-tab" onclick="switchTab('compliance',this)">Compliance</div>
   </div>
   <div class="topbar-right">
-    <div class="live-pill"><div class="pulse"></div>Live · May 2026</div>
+    <div class="live-pill"><div class="pulse"></div>Live · <span id="live-pill-date"></span></div>
     <div class="date-badge">Emirates Neon Group</div>
   </div>
 </nav>
@@ -764,8 +764,164 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);display:flex;flex-direct
   </div><!-- /dashboard -->
 
   <!-- ══════════════════════════════════
-       RIGHT — CHAT PANEL
+       ANALYTICS PANEL
        ══════════════════════════════════ -->
+  <div class="dashboard" id="analytics" style="display:none">
+
+    <div class="section-label fi"><span></span>01 — Payroll Analytics</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px">
+      <div class="card" style="padding:18px">
+        <div style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">TOTAL GROSS PAYROLL</div>
+        <div style="font-size:26px;font-weight:700;color:var(--gold)" id="an-total-gross">—</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">Monthly — all 115 employees</div>
+      </div>
+      <div class="card" style="padding:18px">
+        <div style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">STAFF PAYROLL</div>
+        <div style="font-size:26px;font-weight:700;color:var(--emerald)" id="an-staff-gross">—</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px" id="an-staff-count">— staff members</div>
+      </div>
+      <div class="card" style="padding:18px">
+        <div style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px">WORKERS PAYROLL</div>
+        <div style="font-size:26px;font-weight:700;color:var(--sapphire)" id="an-worker-gross">—</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px" id="an-worker-count">— workers</div>
+      </div>
+    </div>
+
+    <div class="section-label fi"><span></span>02 — Nationality Breakdown</div>
+    <div class="card" style="padding:18px;margin-bottom:20px">
+      <div id="an-nationality-bars" style="display:flex;flex-direction:column;gap:10px"></div>
+    </div>
+
+    <div class="section-label fi"><span></span>03 — Department Payroll Cost</div>
+    <div class="card" style="padding:18px;margin-bottom:20px">
+      <div id="an-dept-bars" style="display:flex;flex-direction:column;gap:10px"></div>
+    </div>
+
+    <div class="section-label fi"><span></span>04 — EOSB Risk Analysis</div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:20px">
+      <div class="card" style="padding:18px">
+        <div style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:12px">EOSB BY CATEGORY</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;justify-content:space-between;font-size:13px">
+            <span style="color:var(--muted)">Staff EOSB</span>
+            <span style="color:var(--gold);font-family:'JetBrains Mono',monospace" id="an-staff-eosb">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:13px">
+            <span style="color:var(--muted)">Workers EOSB</span>
+            <span style="color:var(--gold);font-family:'JetBrains Mono',monospace" id="an-worker-eosb">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;border-top:1px solid var(--border);padding-top:8px">
+            <span style="color:var(--text);font-weight:600">Total Net EOSB</span>
+            <span style="color:var(--emerald);font-family:'JetBrains Mono',monospace;font-weight:700" id="an-total-eosb">—</span>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="padding:18px">
+        <div style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:12px">ACCRUAL PROJECTIONS</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;justify-content:space-between;font-size:13px">
+            <span style="color:var(--muted)">Monthly accrual</span>
+            <span style="color:var(--amber);font-family:'JetBrains Mono',monospace" id="an-monthly">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:13px">
+            <span style="color:var(--muted)">12-month projection</span>
+            <span style="color:var(--amber);font-family:'JetBrains Mono',monospace" id="an-proj12">—</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:13px">
+            <span style="color:var(--muted)">24-month projection</span>
+            <span style="color:var(--ruby);font-family:'JetBrains Mono',monospace" id="an-proj24">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /analytics -->
+
+  <!-- ══════════════════════════════════
+       COMPLIANCE PANEL
+       ══════════════════════════════════ -->
+  <div class="dashboard" id="compliance" style="display:none">
+
+    <div class="section-label fi"><span></span>01 — Document Expiry Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px">
+      <div class="card" style="padding:18px;border:1px solid rgba(244,67,54,.3)">
+        <div style="font-size:11px;color:var(--ruby);font-family:'JetBrains Mono',monospace;margin-bottom:8px">PASSPORTS OVERDUE</div>
+        <div style="font-size:36px;font-weight:700;color:var(--ruby)" id="cp-pass-exp">—</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">Immediate renewal required</div>
+      </div>
+      <div class="card" style="padding:18px;border:1px solid rgba(244,67,54,.3)">
+        <div style="font-size:11px;color:var(--ruby);font-family:'JetBrains Mono',monospace;margin-bottom:8px">VISAS OVERDUE</div>
+        <div style="font-size:36px;font-weight:700;color:var(--ruby)" id="cp-visa-exp">—</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">MOHRE fine risk</div>
+      </div>
+      <div class="card" style="padding:18px;border:1px solid rgba(244,67,54,.3)">
+        <div style="font-size:11px;color:var(--ruby);font-family:'JetBrains Mono',monospace;margin-bottom:8px">LABOUR CARDS OVERDUE</div>
+        <div style="font-size:36px;font-weight:700;color:var(--ruby)" id="cp-labor-exp">—</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">AED 500+/month fine each</div>
+      </div>
+    </div>
+
+    <div class="section-label fi"><span></span>02 — MOHRE Fine Exposure</div>
+    <div class="card" style="padding:18px;margin-bottom:20px;border:1px solid rgba(244,67,54,.2)">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-size:13px;color:var(--muted)">Total overdue documents</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px">Passports + Visas + Labour Cards</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:28px;font-weight:700;color:var(--ruby)" id="cp-total-exp">—</div>
+          <div style="font-size:11px;color:var(--muted)">documents overdue</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+        <div style="font-size:13px;color:var(--text);font-weight:600">Estimated MOHRE fine exposure</div>
+        <div style="font-size:24px;font-weight:700;color:var(--ruby);font-family:'JetBrains Mono',monospace" id="cp-mohre-fine">—</div>
+      </div>
+    </div>
+
+    <div class="section-label fi"><span></span>03 — Expiring Within 90 Days</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px">
+      <div class="card" style="padding:18px;border:1px solid rgba(255,143,0,.3)">
+        <div style="font-size:11px;color:var(--amber);font-family:'JetBrains Mono',monospace;margin-bottom:8px">PASSPORTS ≤90 DAYS</div>
+        <div style="font-size:36px;font-weight:700;color:var(--amber)" id="cp-pass-warn">—</div>
+      </div>
+      <div class="card" style="padding:18px;border:1px solid rgba(255,143,0,.3)">
+        <div style="font-size:11px;color:var(--amber);font-family:'JetBrains Mono',monospace;margin-bottom:8px">VISAS ≤90 DAYS</div>
+        <div style="font-size:36px;font-weight:700;color:var(--amber)" id="cp-visa-warn">—</div>
+      </div>
+      <div class="card" style="padding:18px;border:1px solid rgba(255,143,0,.3)">
+        <div style="font-size:11px;color:var(--amber);font-family:'JetBrains Mono',monospace;margin-bottom:8px">LABOUR CARDS ≤90 DAYS</div>
+        <div style="font-size:36px;font-weight:700;color:var(--amber)" id="cp-labor-warn">—</div>
+      </div>
+    </div>
+
+    <div class="section-label fi"><span></span>04 — UAE Law Compliance Status</div>
+    <div class="card" style="padding:18px;margin-bottom:20px">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:rgba(0,191,165,.06);border-radius:8px;border:1px solid rgba(0,191,165,.15)">
+          <span style="font-size:13px">WPS Salary Payment</span>
+          <span style="font-size:11px;font-weight:700;color:var(--emerald);font-family:'JetBrains Mono',monospace;background:rgba(0,191,165,.15);padding:3px 10px;border-radius:20px">COMPLIANT</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:rgba(0,191,165,.06);border-radius:8px;border:1px solid rgba(0,191,165,.15)">
+          <span style="font-size:13px">Annual Leave — Article 29</span>
+          <span style="font-size:11px;font-weight:700;color:var(--emerald);font-family:'JetBrains Mono',monospace;background:rgba(0,191,165,.15);padding:3px 10px;border-radius:20px">COMPLIANT</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:rgba(244,67,54,.06);border-radius:8px;border:1px solid rgba(244,67,54,.15)">
+          <span style="font-size:13px">Document Renewals — MOHRE</span>
+          <span style="font-size:11px;font-weight:700;color:var(--ruby);font-family:'JetBrains Mono',monospace;background:rgba(244,67,54,.15);padding:3px 10px;border-radius:20px">ACTION REQUIRED</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:rgba(0,191,165,.06);border-radius:8px;border:1px solid rgba(0,191,165,.15)">
+          <span style="font-size:13px">Gratuity Accrual — Article 51</span>
+          <span style="font-size:11px;font-weight:700;color:var(--emerald);font-family:'JetBrains Mono',monospace;background:rgba(0,191,165,.15);padding:3px 10px;border-radius:20px">COMPLIANT</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:rgba(0,191,165,.06);border-radius:8px;border:1px solid rgba(0,191,165,.15)">
+          <span style="font-size:13px">EOSB Calculation — Decree 33/2021</span>
+          <span style="font-size:11px;font-weight:700;color:var(--emerald);font-family:'JetBrains Mono',monospace;background:rgba(0,191,165,.15);padding:3px 10px;border-radius:20px">COMPLIANT</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /compliance -->
   <div class="chat-panel" role="complementary" aria-label="HR COSMOS AI Assistant">
 
     <div class="chat-header">
@@ -1731,8 +1887,128 @@ document.getElementById('chatInput').addEventListener('keydown', e => {
 });
 
 
-// ═══════════════════════════════════════════════════════
-// HR COSMOS LIVE CALCULATION ENGINE — v17
+// ── Tab switching ──
+function switchTab(tabId, el) {
+  // Hide all panels
+  ['dashboard','analytics','compliance'].forEach(id => {
+    const p = document.getElementById(id);
+    if (p) p.style.display = 'none';
+  });
+  // Show selected
+  const panel = document.getElementById(tabId);
+  if (panel) panel.style.display = 'block';
+  // Update active tab style
+  document.querySelectorAll('.nav-tab').forEach(t => {
+    t.classList.remove('active');
+  });
+  if (el) el.classList.add('active');
+  // Populate analytics if needed
+  if (tabId === 'analytics') populateAnalytics();
+  if (tabId === 'compliance') populateCompliance();
+}
+
+function populateAnalytics() {
+  const today = new Date(); today.setHours(0,0,0,0);
+  function pDate(s) { if(!s||!s.trim()) return null; const p=s.split('-'); return p.length===3?new Date(+p[0],+p[1]-1,+p[2]):null; }
+  function calcGrat(basic,doj) { const d=pDate(doj); if(!d) return 0; const yrs=(today-d)/(1000*60*60*24*365.25); if(yrs<1) return 0; const dr=basic/30; let g=yrs<=5?dr*21*yrs:(dr*21*5)+(dr*30*(yrs-5)); return Math.min(Math.round(g),basic*24); }
+  function calcAccrual(basic,doj) { const d=pDate(doj); if(!d) return 0; const yrs=(today-d)/(1000*60*60*24*365.25); if(yrs<1) return 0; return Math.round((basic/30)*(yrs>5?30:21)/12); }
+
+  let sgross=0,wgross=0,sc=0,wc=0;
+  let seosb=0,weosb=0,tpaid=0,tleave=0,taccrual=0;
+  let natMap={}, deptMap={};
+
+  ENG_EMPLOYEES.forEach(e => {
+    const [code,name,cat,dept,nat,doj,basic,gross,paid,pp,vp,lp,leaveAED]=e;
+    const g=calcGrat(basic,doj);
+    const lv=Math.max(0,leaveAED);
+    const acc=calcAccrual(basic,doj);
+    if(cat==='Staff'){sgross+=gross;sc++;seosb+=(g+lv-paid);}
+    else{wgross+=gross;wc++;weosb+=(g+lv-paid);}
+    tpaid+=paid; tleave+=lv; taccrual+=acc;
+    natMap[nat]=(natMap[nat]||0)+1;
+    deptMap[dept]=(deptMap[dept]||0)+gross;
+  });
+
+  function fmt(n){return 'AED '+Math.round(n).toLocaleString();}
+  function set(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
+
+  set('an-total-gross', fmt(sgross+wgross));
+  set('an-staff-gross', fmt(sgross));
+  set('an-staff-count', sc+' staff members');
+  set('an-worker-gross', fmt(wgross));
+  set('an-worker-count', wc+' workers');
+  set('an-staff-eosb', fmt(seosb));
+  set('an-worker-eosb', fmt(weosb));
+  set('an-total-eosb', fmt(seosb+weosb));
+  set('an-monthly', fmt(taccrual));
+  set('an-proj12', fmt((seosb+weosb)+taccrual*12));
+  set('an-proj24', fmt((seosb+weosb)+taccrual*24));
+
+  // Nationality bars
+  const natEl = document.getElementById('an-nationality-bars');
+  if(natEl) {
+    const sorted = Object.entries(natMap).sort((a,b)=>b[1]-a[1]);
+    const total = ENG_EMPLOYEES.length;
+    natEl.innerHTML = sorted.map(([nat,count])=>`
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:100px;font-size:12px;color:var(--muted)">${nat}</div>
+        <div style="flex:1;background:var(--faint);border-radius:4px;height:20px;overflow:hidden">
+          <div style="width:${Math.round(count/total*100)}%;background:linear-gradient(90deg,var(--gold),var(--gold-light));height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px">
+            <span style="font-size:11px;color:var(--void);font-weight:700">${count}</span>
+          </div>
+        </div>
+        <div style="width:30px;font-size:11px;color:var(--muted);text-align:right">${Math.round(count/total*100)}%</div>
+      </div>`).join('');
+  }
+
+  // Department bars
+  const deptEl = document.getElementById('an-dept-bars');
+  if(deptEl) {
+    const sorted = Object.entries(deptMap).sort((a,b)=>b[1]-a[1]).slice(0,10);
+    const max = sorted[0][1];
+    deptEl.innerHTML = sorted.map(([dept,gross])=>`
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:140px;font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${dept}</div>
+        <div style="flex:1;background:var(--faint);border-radius:4px;height:20px;overflow:hidden">
+          <div style="width:${Math.round(gross/max*100)}%;background:linear-gradient(90deg,var(--sapphire),#7B61FF);height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px">
+            <span style="font-size:10px;color:#fff;font-weight:600">AED ${Math.round(gross).toLocaleString()}</span>
+          </div>
+        </div>
+      </div>`).join('');
+  }
+}
+
+function populateCompliance() {
+  const today = new Date(); today.setHours(0,0,0,0);
+  function pDate(s){if(!s||!s.trim())return null;const p=s.split('-');return p.length===3?new Date(+p[0],+p[1]-1,+p[2]):null;}
+  function docSt(s){const d=pDate(s);if(!d)return 'x';const diff=(d-today)/(1000*60*60*24);if(diff<0)return 'exp';if(diff<=90)return 'w90';return 'ok';}
+
+  let ep=0,ev=0,el=0,wp=0,wv=0,wl=0;
+  ENG_EMPLOYEES.forEach(e=>{
+    const [,,,,,,,,,,pp,vp,lp]=e.length>10?[...e.slice(0,10),e[9],e[10],e[11]]:e;
+    const pass=e[9],visa=e[10],labor=e[11];
+    const ps=docSt(pass),vs=docSt(visa),ls=docSt(labor);
+    if(ps==='exp')ep++;else if(ps==='w90')wp++;
+    if(vs==='exp')ev++;else if(vs==='w90')wv++;
+    if(ls==='exp')el++;else if(ls==='w90')wl++;
+  });
+
+  function set(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
+  set('cp-pass-exp',ep); set('cp-visa-exp',ev); set('cp-labor-exp',el);
+  set('cp-pass-warn',wp); set('cp-visa-warn',wv); set('cp-labor-warn',wl);
+  const totExp=ep+ev+el;
+  set('cp-total-exp',totExp);
+  set('cp-mohre-fine','AED '+((totExp*500)).toLocaleString()+'/month');
+}
+
+// Update live pill date
+(function(){
+  const el = document.getElementById('live-pill-date');
+  if(el){
+    const now = new Date();
+    el.textContent = now.toLocaleDateString('en-GB',{month:'short',year:'numeric'});
+  }
+})();
 // Recalculates automatically every page load
 // ═══════════════════════════════════════════════════════
 
